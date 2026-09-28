@@ -496,14 +496,11 @@
             document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + ' บาท';
         }
 
-     function submitEnrollment() {
+    function submitEnrollment() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
 
-    if (!nameInput || !phoneInput) {
-        alert('ไม่พบช่องกรอกข้อมูล กรุณาตรวจสอบ ID ของฟอร์มครับ');
-        return;
-    }
+    if (!nameInput || !phoneInput) return;
 
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
@@ -516,7 +513,6 @@
     let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
     let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-    // ข้อความที่จะส่งเข้า LINE
     let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                `📚 คอร์ส: ${currentCourse.name}\n` +
                `💰 ราคาหลังหักส่วนลด: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
@@ -524,11 +520,15 @@
                `📞 เบอร์โทร: ${phone}\n` +
                `💻 รูปแบบ: ออนไลน์ 100%`;
 
-    // บังคับเปิดลิงก์ LINE พร้อมส่งข้อความทันที
-    let lineUrl = `https://line.me/R/ti/p/@256jetse?text=` + encodeURIComponent(text);
-    
-    // สั่งเปิดหน้า LINE
-    window.location.href = lineUrl;
+    // คัดลอกข้อความลงในเครื่องอัตโนมัติ
+    navigator.clipboard.writeText(text).then(() => {
+        alert('คัดลอกข้อมูลสมัครเรียนเรียบร้อยแล้ว!\n\nระบบจะพาไปที่ LINE (@256jetse)\n👉 ให้กดยืนยัน "วาง" ข้อความในแชทแล้วกดส่งได้เลยครับ');
+        window.location.href = 'https://line.me/R/ti/p/@256jetse';
+    }).catch(err => {
+        // เผื่อกรณีเบราว์เซอร์ไม่อนุญาต ให้แสดงข้อความให้ผู้ใช้ก๊อปปี้เอง
+        prompt("คัดลอกข้อความด้านล่างนี้เพื่อส่งให้แอดมินใน LINE:", text);
+        window.location.href = 'https://line.me/R/ti/p/@256jetse';
+    });
 }
 
         function submitCustomTopics() {
