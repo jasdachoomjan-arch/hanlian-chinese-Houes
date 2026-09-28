@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บ้านภาษาจีนหาญเหลียน | Han-Lian Chinese Language House | 涵莲中文小馆</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Sarabun & Ma Shan Zheng for Chinese -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#d4af37',
+                            600: '#b89728',
+                            700: '#997d1e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Sarabun', 'sans-serif'],
+                        chinese: ['Ma Shan Zheng', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-amber-50/30 text-slate-800 font-sans antialiased selection:bg-gold-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-emerald-800 text-amber-100 text-xs sm:text-sm py-2 px-4 text-center font-medium tracking-wide border-b border-gold-500/30">
+        <span class="font-chinese text-base mr-2">涵莲中文小馆</span> คอร์สเรียนภาษาจีนออนไลน์ 100% พรีเมียม | สมัครเรียนติดต่อ LINE: <a href="https://line.me/R/ti/p/@256jetse" class="underline font-bold text-white hover:text-amber-200">@256jetse</a>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 text-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-700 to-emerald-900 flex items-center justify-center shadow-md border border-gold-500">
+                    <span class="text-gold-400 font-chinese text-2xl font-bold">涵</span>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight text-emerald-900">บ้านภาษาจีนหาญเหลียน</h1>
+                    <p class="text-xs text-slate-500 font-medium">Han-Lian Chinese Language House <span class="font-chinese text-gold-600 ml-1">涵莲中文小馆</span></p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#courses" class="hover:text-emerald-700 transition">หลักสูตรออนไลน์</a>
+                <a href="#custom-topic" class="hover:text-emerald-700 transition">จัดหัวข้อเอง (1-on-1)</a>
+                <a href="#reviews" class="hover:text-emerald-700 transition">รีวิวจากผู้เรียน</a>
+                <a href="#payment" class="hover:text-emerald-700 transition">ช่องทางชำระเงิน</a>
+                <a href="https://line.me/R/ti/p/@256jetse" target="_blank" class="bg-gradient-to-r from-emerald-800 to-emerald-900 hover:from-emerald-900 hover:to-emerald-950 text-gold-400 px-5 py-2.5 rounded-full font-bold shadow-md transition transform hover:-translate-y-0.5">
+                    ติดต่อ LINE OA
+                </a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <a href="https://line.me/R/ti/p/@256jetse" target="_blank" class="bg-emerald-800 text-gold-400 px-4 py-2 rounded-full text-xs font-bold shadow">
+                    LINE OA
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-950 text-white py-20 lg:py-28 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs uppercase tracking-widest px-4 py-1.5 rounded-full font-semibold mb-6">
+                ONLINE EXCLUSIVE LEARNING
+            </span>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                ยกระดับภาษาจีนของคุณด้วยมาตรฐานพรีเมียม <br>
+                <span class="font-chinese text-gold-400 text-5xl sm:text-6xl mt-2 inline-block">匠心中文，成就未来</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-emerald-100 text-base sm:text-lg mb-10 leading-relaxed">
+                สถาบันสอนภาษาจีนออนไลน์เน้นคุณภาพเฉพาะบุคคล หลักสูตรเข้มข้น ตอบโจทย์ทุกเป้าหมายการใช้งานจริง ทั้งสนทนาธุรกิจ ท่องเที่ยว และเตรียมสอบ HSK
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#courses" class="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-white font-bold px-8 py-4 rounded-xl shadow-xl transition transform hover:-translate-y-1 text-base">
+                    ดูคอร์สเรียนทั้งหมด
+                </a>
+                <a href="https://line.me/R/ti/p/@256jetse" target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-gold-500/50 font-semibold px-8 py-4 rounded-xl shadow-lg transition text-base">
+                    ปรึกษาหลักสูตรผ่าน LINE
+                </a>
+            </div>
+        </div>
+    </section>
+
+   <!-- Course Categories Section with Images -->
+    <section id="courses" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-emerald-950 mb-4">หลักสูตรยอดนิยม (Online 100%)</h2>
+                <p class="text-slate-600 text-base">เลือกคอร์สที่ใช่สำหรับคุณ เรียนสดผ่านระบบออนไลน์คุณภาพสูง สะดวก ปลอดภัย และยืดหยุ่น</p>
+                <div class="w-24 h-1 bg-gold-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Course 1: Group Class -->
+                <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition flex flex-col justify-between group">
+                    <div class="relative h-48 overflow-hidden bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" alt="คอร์สกลุ่ม" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-3 left-4 text-white text-xs font-bold bg-emerald-800/90 px-3 py-1 rounded-full backdrop-blur-sm">
+                            กลุ่มเล็ก เป็นกันเอง
+                        </span>
+                    </div>
+                    <div class="p-8 flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950 mb-2">คอร์สกลุ่ม (Group Class)</h3>
+                            <p class="text-xs text-gold-600 font-semibold uppercase tracking-wider mb-4">บรรยากาศโต้ตอบสนุก ได้แลกเปลี่ยน</p>
+                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                                เหมาะสำหรับผู้ที่ต้องการฝึกฝนการสนทนากับเพื่อนร่วมชั้น ได้แลกเปลี่ยนมุมมอง และเรียนรู้ร่วมกันอย่างมีชีวิตชีวา
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center">✓ เรียนออนไลน์ผ่าน Zoom / Google Meet</li>
+                                <li class="flex items-center">✓ จำกัดผู้เรียนต่อกลุ่มไม่เกิน 6 คน</li>
+                                <li class="flex items-center">✓ เอกสารการเรียนประกอบครบชุด</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="mb-6">
+                                <span class="text-2xl font-extrabold text-emerald-900">3,500 บาท</span>
+                                <span class="text-xs text-slate-500 block">/ คอร์ส (20 ชั่วโมง)</span>
+                            </div>
+                            <button onclick="openEnrollModal('คอร์สกลุ่ม (Group Class)', 3500)" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white text-lg mb-3 font-bold py-3 rounded-xl transition shadow">
+                                สมัครเรียนคอร์สนี้
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2: 1-on-1 Personalized -->
+                <div class="bg-white rounded-2xl overflow-hidden border-2 border-gold-500 shadow-2xl flex flex-col justify-between relative group transform md:-translate-y-2">
+                    <div class="absolute top-3 right-3 z-10 bg-gradient-to-r from-gold-400 to-gold-500 text-emerald-950 text-xs font-extrabold px-3 py-1 rounded-full shadow">
+                        ยอดนิยมสูงสุด
+                    </div>
+                    <div class="relative h-48 overflow-hidden bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop" alt="คอร์สตัวต่อตัว" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/70 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-3 left-4 text-white text-xs font-bold bg-rose-500 px-3 py-1 rounded-full backdrop-blur-sm">
+                            ตัวต่อตัว เลือกหัวข้อเองได้
+                        </span>
+                    </div>
+                    <div class="p-8 flex flex-col justify-between flex-1 bg-gradient-to-b from-white to-emerald-50/20">
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950 mb-2">คอร์สตัวต่อตัว (1-on-1)</h3>
+                            <p class="text-xs text-gold-700 font-semibold uppercase tracking-wider mb-4">ออกแบบเนื้อหาเฉพาะคุณ</p>
+                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                                เน้นผลลัพธ์รวดเร็ว เจาะลึกตรงจุด พร้อมระบบเลือกหัวข้อพิเศษด้านล่างเพื่อปรับบทเรียนให้เข้ากับไลฟ์สไตล์หรือการทำงานของคุณ
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center">✓ โค้ชชิ่งตัวต่อตัวกับผู้เชี่ยวชาญ</li>
+                                <li class="flex items-center">✓ เลือกวันเวลาเรียนได้ยืดหยุ่น</li>
+                                <li class="flex items-center">✓ Custom Topic เลือกหัวข้อเฉพาะทางได้</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="mb-6">
+                                <span class="text-2xl font-extrabold text-emerald-900">5,900 บาท</span>
+                                <span class="text-xs text-slate-500 block">/ คอร์ส (15 ชั่วโมง)</span>
+                            </div>
+                            <button onclick="openEnrollModal('คอร์สตัวต่อตัว (1-on-1 Personalized)', 5900)" class="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white text-lg font-bold py-3 rounded-xl transition shadow-lg">
+                                สมัครเรียนคอร์สนี้
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3: HSK Prep -->
+                <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition flex flex-col justify-between group">
+                    <div class="relative h-48 overflow-hidden bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=800&auto=format&fit=crop" alt="คอร์สติวสอบ HSK" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-3 left-4 text-white text-xs font-bold bg-emerald-800/90 px-3 py-1 rounded-full backdrop-blur-sm">
+                            การันตีผลคะแนน
+                        </span>
+                    </div>
+                    <div class="p-8 flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950 mb-2">คอร์สติวสอบ HSK</h3>
+                            <p class="text-xs text-gold-600 font-semibold uppercase tracking-wider mb-4">เทคนิคทำข้อสอบเน้นๆ</p>
+                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                                เตรียมความพร้อมสําหรับผู้ที่ต้องการสอบวัดระดับความสามารถทางภาษาจีน (HSK ทุกระดับ) พร้อมตะลุยโจทย์ข้อสอบจริงย้อนหลัง
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center">✓ สรุปไวยากรณ์และคำศัพท์ออกสอบบ่อย</li>
+                                <li class="flex items-center">✓ เทคนิคจับเวลาและตัดช้อยส์</li>
+                                <li class="flex items-center">✓ จำลองการสอบเสมือนจริง (Mock Exam)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="mb-6">
+                                <span class="text-2xl font-extrabold text-emerald-900">4,200 บาท</span>
+                                <span class="text-xs text-slate-500 block">/ คอร์ส (18 ชั่วโมง)</span>
+                            </div>
+                            <button onclick="openEnrollModal('คอร์สเตรียมสอบ HSK', 4200)" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white text-lg font-bold py-3 rounded-xl transition shadow">
+                                สมัครเรียนคอร์สนี้
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Custom Topic Selector Section (For 1-on-1) -->
+    <section id="custom-topic" class="py-20 bg-emerald-50/50 border-y border-emerald-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-gold-700 font-semibold text-xs tracking-widest uppercase bg-gold-500/20 px-3 py-1 rounded-full border border-gold-500/40">Interactive Feature</span>
+                <h2 class="text-3xl font-bold text-emerald-950 mt-3 mb-2">เลือกหัวข้อเฉพาะทางสำหรับคอร์สตัวต่อตัว</h2>
+                <p class="text-slate-600 text-sm">ติ๊กเลือกหัวข้อที่คุณสนใจ เพื่อจัดทำหลักสูตรเฉพาะกิจส่งตรงให้ผู้สอนผ่าน LINE ได้ทันที</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200">
+                <h3 class="font-bold text-emerald-950 text-lg mb-4 flex items-center">
+                    <span class="text-gold-600 mr-2 text-xl">✦</span> เลือกหัวข้อที่ต้องการเน้นเป็นพิเศษ (เลือกได้มากกว่า 1 หัวข้อ):
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    <label class="flex items-center space-x-3 p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/40 cursor-pointer transition">
+                        <input type="checkbox" name="custom_topic" value="ภาษาจีนสำหรับงานโรงแรมและรีสอร์ท" class="w-5 h-5 text-emerald-700 rounded border-slate-300 focus:ring-gold-500">
+                        <span class="text-slate-800 font-medium text-sm">ภาษาจีนสำหรับงานโรงแรมและรีสอร์ท (酒店工作)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/40 cursor-pointer transition">
+                        <input type="checkbox" name="custom_topic" value="การสนทนาธุรกิจและการเจรจาการค้า" class="w-5 h-5 text-emerald-700 rounded border-slate-300 focus:ring-gold-500">
+                        <span class="text-slate-800 font-medium text-sm">การสนทนาธุรกิจและการเจรจาการค้า</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/40 cursor-pointer transition">
+                        <input type="checkbox" name="custom_topic" value="ภาษาจีนเพื่อการท่องเที่ยวและการบริการ" class="w-5 h-5 text-emerald-700 rounded border-slate-300 focus:ring-gold-500">
+                        <span class="text-slate-800 font-medium text-sm">ภาษาจีนเพื่อการท่องเที่ยวและการบริการ</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 rounded-xl border border-emerald-600 hover:bg-emerald-50/40 cursor-pointer transition">
+                        <input type="checkbox" name="custom_topic" value="พินอินและการออกเสียงให้เป๊ะเหมือนเจ้าของภาษา" class="w-5 h-5 text-emerald-700 rounded border-slate-300 focus:ring-gold-500">
+                        <span class="text-slate-800 font-medium text-sm">พินอินและการออกเสียง (Pinyin & Pronunciation)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/40 cursor-pointer transition">
+                        <input type="checkbox" name="custom_topic" value="ภาษาจีนสำหรับงานบริการลูกค้าออนไลน์ (E-commerce)" class="w-5 h-5 text-emerald-700 rounded border-slate-300 focus:ring-gold-500">
+                        <span class="text-slate-800 font-medium text-sm">ภาษาจีนสำหรับงานบริการลูกค้า (E-commerce)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/40 cursor-pointer transition">
+                        <input type="checkbox" name="custom_topic" value="ภาษาจีนพื้นฐานสำหรับผู้เริ่มต้นจากศูนย์" class="w-5 h-5 text-emerald-700 rounded border-slate-300 focus:ring-gold-500">
+                        <span class="text-slate-800 font-medium text-sm">ภาษาจีนพื้นฐานสำหรับผู้เริ่มต้นจากศูนย์</span>
+                    </label>
+                </div>
+
+                <div class="bg-gradient-to-r from-emerald-900 to-emerald-950 rounded-xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
+                    <div>
+                        <h4 class="font-bold text-gold-300 text-base mb-1">ต้องการหลักสูตรเฉพาะทางนี้?</h4>
+                        <p class="text-xs text-emerald-100">กดปุ่มด้านข้างเพื่อส่งหัวข้อที่เลือกตรงเข้า LINE แอดมินเพื่อประเมินหลักสูตรทันที</p>
+                    </div>
+                    <button onclick="submitCustomTopics()" class="w-full sm:w-auto bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-emerald-950 font-bold px-6 py-3 rounded-xl shadow-lg transition whitespace-nowrap">
+                        ส่งหัวข้อที่เลือกผ่าน LINE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Reviews Section -->
+   <!-- Student Reviews Section -->
+    <section id="reviews" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-700 font-semibold text-xs tracking-widest uppercase bg-gold-500/20 px-3 py-1 rounded-full border border-gold-500/40">Testimonials</span>
+                <h2 class="text-3xl font-bold text-emerald-950 mt-3 mb-2">ความประทับใจจากผู้เรียนจริง</h2>
+                <p class="text-slate-600 text-sm">เสียงสะท้อนส่วนหนึ่งจากผู้เรียนที่ประสบความสำเร็จกับบ้านภาษาจีนหาญเหลียน</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-emerald-50/40 border border-emerald-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="text-gold-500 text-lg mb-3">★★★★★</div>
+                        <p class="text-slate-700 text-sm italic mb-6 leading-relaxed">
+                            "ลงเรียนคอร์สตัวต่อตัว เลือกหัวข้อภาษาจีนโรงแรม ได้นำไปใช้จริงที่ทำงานทันที อาจารย์สอนเข้าใจง่าย เทคนิคการออกเสียงเป๊ะมากค่ะ"
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-emerald-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-gold-500 text-lg mb-3 flex items-center justify-center font-bold text-sm">
+                            ★
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-amber-600">คุณหยาง</p>
+                            <p class="text-xs text-slate-500">ผู้เรียนคอร์ส 1-on-1 (งานบริการ)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-emerald-50/40 border border-emerald-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="text-gold-500 text-lg mb-3">★★★★★</div>
+                        <p class="text-slate-700 text-sm italic mb-6 leading-relaxed">
+                            "เรียนคอร์สกลุ่มบรรยากาศเป็นกันเองมากครับ ไม่กดดัน ได้ฝึกพูดกับเพื่อนๆ ทุกคลาส แกรมม่าที่เคยยากกลายเป็นเรื่องง่ายเลย"
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-emerald-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-gold-500 text-lg mb-3 flex items-center justify-center font-bold text-sm">
+                            ★
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-amber-600">คุณหญิง</p>
+                            <p class="text-xs text-slate-500">ผู้เรียนคอร์สกลุ่ม (Group Class)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-emerald-50/40 border border-emerald-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="text-gold-500 text-lg mb-3">★★★★★</div>
+                        <p class="text-slate-700 text-sm italic mb-6 leading-relaxed">
+                            "ติวสอบ HSK กับที่นี่เทคนิคแพรวพราวมากครับ อาจารย์ช่วยเก็งข้อสอบและจับจุดพลาด ทำให้สอบผ่านฉลุยคะแนนตามเป้าเลยครับ"
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-emerald-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-gold-500 text-lg mb-3 flex items-center justify-center font-bold text-sm">
+                            ★
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-amber-600">นีน่า</p>
+                            <p class="text-xs text-slate-500">ผู้เรียนคอร์สเตรียมสอบ HSK</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment" class="py-20 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-700 font-semibold text-xs tracking-widest uppercase bg-gold-500/20 px-3 py-1 rounded-full border border-gold-500/40">Payment Secure</span>
+                <h2 class="text-3xl font-bold text-emerald-950 mt-3 mb-2">ช่องทางการชำระเงิน</h2>
+                <p class="text-slate-600 text-sm">ชำระค่าเรียนสะดวกรวดเร็วผ่านระบบพร้อมเพย์หรือโอนผ่านบัญชีธนาคาร</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-md">
+                    <h3 class="text-xl font-bold text-emerald-950 mb-4 flex items-center">
+                        <span class="w-8 h-8 rounded-lg bg-gold-500 text-emerald-950 inline-flex items-center justify-center mr-3 text-sm font-bold">1</span> 
+                        โอนผ่านบัญชีธนาคาร / พร้อมเพย์
+                    </h3>
+                    <div class="space-y-4 text-sm text-slate-700">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="text-xs text-slate-500">ธนาคารกสิกรไทย (KBANK)</p>
+                            <p class="text-lg font-bold text-emerald-950 font-mono tracking-wider">013-1809-72-7</p>
+                            <p class="text-xs text-slate-600 mt-1">ชื่อบัญชี: ปุริม ชุ่มจันทร์</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="text-xs text-slate-500">พร้อมเพย์ (PromptPay)</p>
+                            <p class="text-lg font-bold text-emerald-950 font-mono tracking-wider">0987622321</p>
+                            <p class="text-xs text-slate-600 mt-1">ชื่อบัญชี: ปุริม ชุ่มจันทร์</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-emerald-900 to-emerald-950 text-white rounded-2xl p-8 shadow-xl border border-gold-500/30">
+                    <h3 class="text-xl font-bold text-gold-300 mb-4 flex items-center">
+                        <span class="w-8 h-8 rounded-lg bg-gold-500 text-emerald-950 inline-flex items-center justify-center mr-3 text-sm font-bold">2</span> 
+                        ขั้นตอนการแจ้งชำระเงิน
+                    </h3>
+                    <ol class="space-y-3 text-sm text-emerald-100 list-decimal list-inside">
+                        <li>สมัครเรียนผ่านปุ่มในเว็บไซต์หรือติดต่อ LINE <strong class="text-white">@256jetse</strong></li>
+                        <li>โอนเงินตามยอดที่สรุปในระบบหรือใบเสนอราคา</li>
+                        <li>ส่งสลิปการโอนเงินเข้ามาทางแชท LINE OA ของโรงเรียน</li>
+                        <li>แอดมินตรวจสอบยอดและออกตารางเรียน/ลิงก์ห้องเรียนให้ทันที</li>
+                    </ol>
+                    <div class="mt-6 pt-6 border-t border-emerald-800 text-center">
+                        <a href="https://line.me/R/ti/p/@256jetse" target="_blank" class="inline-block bg-gold-400 hover:bg-gold-500 text-emerald-950 font-bold px-6 py-2.5 rounded-xl shadow transition text-sm">
+                            แจ้งสลิปชำระเงินผ่าน LINE
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-slate-400 py-12 border-t border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-gold-500 flex items-center justify-center text-emerald-950 font-chinese font-bold text-xl shadow">
+                    涵
+                </div>
+                <span class="text-white font-bold text-lg">บ้านภาษาจีนหาญเหลียน (Han-Lian Chinese Language House)</span>
+            </div>
+            <p class="text-xs text-gold-400 font-chinese text-base mb-4">涵莲中文小馆 - 专业中文在线教育</p>
+            <p class="text-xs text-slate-500">© 2026 Han-Lian Chinese Language House. Online 100% All rights reserved. LINE OA: @256jetse</p>
+        </div>
+    </footer>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gold-500/30 relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeEnrollModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                ✕
+            </button>
+            
+            <h3 class="text-2xl font-bold text-emerald-950 mb-1">ยืนยันการสมัครเรียน</h3>
+            <p id="modalCourseName" class="text-sm font-semibold text-gold-700 mb-6 pb-3 border-b border-slate-100">ชื่อคอร์ส</p>
+
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">ชื่อ - นามสกุล ผู้เรียน</label>
+                    <input type="text" id="userName" placeholder="กรุณากรอกชื่อและนามสกุลของคุณ" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">เบอร์โทรศัพท์ติดต่อ</label>
+                    <input type="tel" id="userPhone" placeholder="08XXXXXXXX" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">รหัสส่วนลด (เฉพาะ HANLIAN10)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="discountCode" placeholder="พิมพ์รหัสส่วนลดที่นี่" class="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm uppercase">
+                        <button onclick="applyDiscount()" class="bg-emerald-800 hover:bg-emerald-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition">ใช้โค้ด</button>
+                    </div>
+                    <p id="discountMsg" class="text-xs mt-1.5 font-medium"></p>
+                </div>
+
+                <div class="p-4 bg-emerald-50/60 rounded-xl border border-emerald-100 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-slate-500 block">ยอดชำระสุทธิ</span>
+                        <span id="finalPriceDisplay" class="text-xl font-extrabold text-emerald-950">0 บาท</span>
+                    </div>
+                    <span class="text-xs bg-emerald-200 text-emerald-900 px-2.5 py-1 rounded-full font-semibold">Online 100%</span>
+                </div>
+            </div>
+
+            <button onclick="submitEnrollment()" class="w-full bg-gradient-to-r from-emerald-800 to-emerald-950 hover:from-emerald-900 hover:to-emerald-900 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-base">
+                <span>ยืนยันข้อมูลและส่งเข้า LINE (@256jetse)</span>
+            </button>
+            <p class="text-center text-[11px] text-slate-400 mt-3">ระบบจะพาคุณไปยังแอปพลิเคชัน LINE อัตโนมัติเพื่อส่งข้อมูลให้แอดมิน</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let currentCourse = { name: '', price: 0 };
+        let appliedDiscountRate = 0; // 0 or 0.10
+
+        function openEnrollModal(courseName, coursePrice) {
+            currentCourse = { name: courseName, price: coursePrice };
+            appliedDiscountRate = 0;
+            document.getElementById('modalCourseName').innerText = courseName;
+            document.getElementById('userName').value = '';
+            document.getElementById('userPhone').value = '';
+            document.getElementById('discountCode').value = '';
+            document.getElementById('discountMsg').innerText = '';
+            updatePriceDisplay();
+            document.getElementById('enrollModal').classList.remove('hidden');
+            document.getElementById('enrollModal').classList.add('flex');
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').classList.remove('flex');
+            document.getElementById('enrollModal').classList.add('hidden');
+        }
+
+        function applyDiscount() {
+            const code = document.getElementById('discountCode').value.trim().toUpperCase();
+            const msgEl = document.getElementById('discountMsg');
+
+            if (code === 'HANLIAN10') {
+                appliedDiscountRate = 0.10;
+                msgEl.className = 'text-xs mt-1.5 font-semibold text-emerald-600';
+                msgEl.innerText = '✓ ใช้โค้ดสำเร็จ! ลด 10%';
+            } else if (code === '') {
+                appliedDiscountRate = 0;
+                msgEl.innerText = '';
+            } else {
+                appliedDiscountRate = 0;
+                msgEl.className = 'text-xs mt-1.5 font-semibold text-rose-600';
+                msgEl.innerText = '✕ รหัสส่วนลดไม่ถูกต้อง (ใช้ได้เฉพาะ HANLIAN10)';
+            }
+            updatePriceDisplay();
+        }
+
+        function updatePriceDisplay() {
+            let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
+            document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + ' บาท';
+        }
+
+      function submitEnrollment() {
+    const name = document.getElementById('userName').value.trim();
+    const phone = document.getElementById('userPhone').value.trim();
+
+    if (!name || !phone) {
+        alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนครับ');
+        return;
+    }
+
+    let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
+    let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
+
+    let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
+               `📚 คอร์ส: ${currentCourse.name}\n` +
+               `💰 ราคาหลังหักส่วนลด: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
+               `👤 ชื่อผู้สมัคร: ${name}\n` +
+               `📞 เบอร์โทร: ${phone}\n` +
+               `💻 รูปแบบ: ออนไลน์ 100%`;
+
+    let lineUrl = `https://line.me/R/ti/p/@256jetse?text=` + encodeURIComponent(text);
+    window.open(lineUrl, '_blank');
+    closeEnrollModal();
+}
+
+        function submitCustomTopics() {
+            const checkboxes = document.querySelectorAll('input[name="custom_topic"]:checked');
+            if (checkboxes.length === 0) {
+                alert('กรุณาเลือกอย่างน้อย 1 หัวข้อที่สนใจครับ');
+                return;
+            }
+
+            let topics = [];
+            checkboxes.forEach((cb) => {
+                topics.push('• ' + cb.value);
+            });
+
+            let text = `สวัสดีค่ะ/ครับ สนใจหลักสูตรตัวต่อตัว (Custom Topic):\n` +
+                       `หัวข้อที่เลือก:\n` + topics.join('\n') + `\n\n` +
+                       `รบกวนแอดมินแนะนำรายละเอียดและตารางเรียนเพิ่มเติมค่ะ/ครับ`;
+
+            let lineUrl = `https://line.me/R/ti/p/@256jetse?text=` + encodeURIComponent(text);
+            window.open(lineUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
