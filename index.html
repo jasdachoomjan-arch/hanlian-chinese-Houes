@@ -633,7 +633,7 @@
             document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + currencyText;
         }
 
-      function submitEnrollment() {
+     function submitEnrollment() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
 
@@ -649,8 +649,8 @@
 
     let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
     let discountCodeUsed = (appliedDiscountRate > 0) ? "HANLIAN10" : "";
-    let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
+    // 1. ส่งข้อมูลไปบันทึกใน Google Sheets หลังบ้านทันทีแบบเบื้องหลัง
     let payload = {
         name: name,
         phone: phone,
@@ -658,9 +658,6 @@
         discountCode: discountCodeUsed
     };
 
-    alert('กำลังบันทึกข้อมูล...');
-
-    // ส่งข้อมูลเข้า Google Sheets
     fetch('https://script.google.com/macros/s/AKfycbxcqwTRkV3E2psdwu3BzFb8wH03KanTNNU7iNfAUMkSUZPFFCS8wnwRZsKrgfyukoyw/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -668,23 +665,15 @@
         body: JSON.stringify(payload)
     });
 
-    // สร้างข้อความสรุปเตรียมไว้ให้ก๊อปปี้ส่ง LINE
-    let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
-               `📚 คอร์ส: ${currentCourse.name}\n` +
-               `💰 ราคาหลังหักส่วนลด: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
-               `👤 ชื่อผู้สมัคร: ${name}\n` +
-               `📞 เบอร์โทร: ${phone}\n` +
-               `💻 รูปแบบ: ออนไลน์ 100%`;
-
-    // บันทึกลงคลิปบอร์ดแล้วแจ้งเตือนให้กดไป LINE เองเพื่อความชัวร์
-    navigator.clipboard.writeText(text).then(() => {
-        alert('✅ บันทึกข้อมูลสำเร็จ และคัดลอกข้อความเรียบร้อยแล้ว!\n\n👉 ระบบจะเปิดหน้า LINE (@256jetse) ให้\nให้กด "วาง" (Paste) ข้อความส่งหาแอดมินได้เลยครับ');
-        window.open('https://line.me/R/ti/p/@256jetse', '_blank');
+    // 2. แจ้งเตือนสั้นๆ แล้วพุ่งไปที่หน้า LINE ทันที
+    alert('บันทึกข้อมูลเรียบร้อย! ระบบกำลังพาไปที่ LINE (@256jetse)');
+    
+    // ปิด Modal (ถ้ามีฟังก์ชันปิด) และพุ่งไป LINE
+    if (typeof closeEnrollModal === 'function') {
         closeEnrollModal();
-    }).catch(err => {
-        prompt("คัดลอกข้อความด้านล่างนี้ส่งให้แอดมินใน LINE:", text);
-        closeEnrollModal();
-    });
+    }
+    
+    window.location.href = 'https://line.me/R/ti/p/@256jetse';
 }
 
         function submitCustomTopics() {
