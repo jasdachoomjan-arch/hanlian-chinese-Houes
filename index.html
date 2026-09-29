@@ -255,8 +255,8 @@
                 </div>
             </div>
             <div class="md:col-span-7 space-y-4">
-                <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full" data-th="ผู้สอนหลัก • Head Instructor" data-en="Head Instructor">ผู้สอนหลัก</span>
-                <h3 class="text-2xl sm:text-3xl font-bold text-emerald-950" data-th="ดร.Padma Han 韩莲博士" data-en="Dr.Padma Han 韩莲博士">ดร.Padma Han 韩莲博士</h3>
+                <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full" data-th="อาจารย์ผู้สอนหลัก" data-en="Head Instructor">ผู้สอนหลัก</span>
+                <h3 class="text-2xl sm:text-3xl font-bold text-emerald-950" data-th="ดร.ปัทมา ฮาน 韩莲博士" data-en="Dr.Padma Han 韩莲博士">ดร.Padma Han 韩莲博士</h3>
                 <p class="text-slate-600 text-sm sm:text-base leading-relaxed" data-th="มุ่งเน้นการถ่ายทอดภาษาจีนด้วยเทคนิคที่เข้าใจง่าย สนุก และนำไปใช้งานได้จริง ไม่ว่าจะเป็นการสนทนาในชีวิตประจำวัน ภาษาจีนเฉพาะทางด้านธุรกิจ โรงแรม รีสอร์ท หรือการเตรียมตัวสอบ HSK" data-en="Dedicated to teaching Chinese through intuitive and fun techniques. Whether it is daily conversation, specialized industry Chinese (hotel & resort), or HSK exam preparation.">
                     มุ่งเน้นการถ่ายทอดภาษาจีนด้วยเทคนิคที่เข้าใจง่าย สนุก และนำไปใช้งานได้จริง ไม่ว่าจะเป็นการสนทนาในชีวิตประจำวัน ภาษาจีนเฉพาะทางด้านธุรกิจ โรงแรม รีสอร์ท หรือการเตรียมตัวสอบ HSK
                 </p>
@@ -633,39 +633,55 @@
             document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + currencyText;
         }
 
-        function submitEnrollment() {
-            const name = document.getElementById('userName').value.trim();
-            const age = document.getElementById('userAge').value.trim();
-            const phone = document.getElementById('userPhone').value.trim();
-            const address = document.getElementById('userAddress').value.trim();
+       function submitEnrollment() {
+    const nameInput = document.getElementById('userName');
+    const phoneInput = document.getElementById('userPhone');
 
-            if (!name || !phone) {
-                alert(currentLang === 'th' ? 'กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนครับ' : 'Please fill in your full name and mobile number.');
-                return;
-            }
+    if (!nameInput || !phoneInput) return;
 
-            let selectedCourse = document.querySelector('.modal-course-radio:checked');
-            if (!selectedCourse) {
-                alert(currentLang === 'th' ? 'กรุณาเลือกหลักสูตรครับ' : 'Please select a course.');
-                return;
-            }
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
 
-            let rawTotal = calculateTotalPrice();
-            let finalPrice = rawTotal * (1 - appliedDiscountRate);
-            let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (10% Off)` : (currentLang === 'th' ? `ไม่มีส่วนลด` : `No discount`);
+    if (!name || !phone) {
+        alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนครับ');
+        return;
+    }
 
-            let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน (Zoom Classroom):\n` +
-                       `📚 หลักสูตรที่เลือก:\n• ${selectedCourse.value}\n` +
-                       `💰 ยอดชำระสุทธิ: ${finalPrice.toLocaleString()} บาท (${discountText})\n` +
-                       `👤 ชื่อ: ${name}\n` +
-                       `🎂 อายุ: ${age || '-'}\n` +
-                       `📞 เบอร์โทร: ${phone}\n` +
-                       `🏠 ที่อยู่: ${address || '-'}`;
+    let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
+    let discountCodeUsed = (appliedDiscountRate > 0) ? "HANLIAN10" : "";
+    let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-            let lineUrl = `https://line.me/R/ti/p/@256jetse?text=` + encodeURIComponent(text);
-            window.open(lineUrl, '_blank');
-            closeEnrollModal();
-        }
+    let payload = {
+        name: name,
+        phone: phone,
+        course: currentCourse.name,
+        discountCode: discountCodeUsed
+    };
+
+    alert('กำลังตรวจสอบข้อมูลและสิทธิ์ส่วนลด...');
+
+    // นำลิงก์ Web App ของคุณมาใส่ไว้ตรงนี้
+    fetch('https://script.google.com/macros/s/AKfycbxcqwTRkV3E2psdwu3BzFb8wH03KanTNNU7iNfAUMkSUZPFFCS8wnwRZsKrgfyukoyw/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    }).then(() => {
+        let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
+                   `📚 คอร์ส: ${currentCourse.name}\n` +
+                   `💰 ราคาหลังหักส่วนลด: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
+                   `👤 ชื่อผู้สมัคร: ${name}\n` +
+                   `📞 เบอร์โทร: ${phone}\n` +
+                   `💻 รูปแบบ: ออนไลน์ 100%`;
+
+        navigator.clipboard.writeText(text).then(() => {
+            alert('บันทึกข้อมูลเรียบร้อย!\nระบบจะพาไปที่ LINE (@256jetse)\n👉 กดยืนยัน "วาง" ข้อความในแชทเพื่อส่งหาแอดมินได้เลยครับ');
+            window.location.href = 'https://line.me/R/ti/p/@256jetse';
+        });
+    }).catch(err => {
+        alert('เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งครับ');
+    });
+}
 
         function submitCustomTopics() {
             const checkboxes = document.querySelectorAll('input[name="custom_topic"]:checked');
