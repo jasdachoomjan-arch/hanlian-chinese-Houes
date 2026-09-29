@@ -633,11 +633,14 @@
             document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + currencyText;
         }
 
-     function submitEnrollment() {
+    function submitEnrollment() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
 
-    if (!nameInput || !phoneInput) return;
+    if (!nameInput || !phoneInput) {
+        alert('ไม่พบช่องกรอกข้อมูล กรุณาตรวจสอบ ID ของฟอร์มครับ');
+        return;
+    }
 
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
@@ -648,32 +651,35 @@
     }
 
     let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
-    let discountCodeUsed = (appliedDiscountRate > 0) ? "HANLIAN10" : "";
+    let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-    // 1. ส่งข้อมูลไปบันทึกใน Google Sheets หลังบ้านทันทีแบบเบื้องหลัง
-    let payload = {
-        name: name,
-        phone: phone,
-        course: currentCourse.name,
-        discountCode: discountCodeUsed
-    };
+    // สร้างข้อความสรุปรายละเอียดทั้งหมด
+    let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
+               `📚 คอร์ส: ${currentCourse.name}\n` +
+               `💰 ราคาหลังหักส่วนลด: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
+               `👤 ชื่อผู้สมัคร: ${name}\n` +
+               `📞 เบอร์โทร: ${phone}\n` +
+               `💻 รูปแบบ: ออนไลน์ 100%`;
 
-    fetch('https://script.google.com/macros/s/AKfycbxcqwTRkV3E2psdwu3BzFb8wH03KanTNNU7iNfAUMkSUZPFFCS8wnwRZsKrgfyukoyw/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    });
-
-    // 2. แจ้งเตือนสั้นๆ แล้วพุ่งไปที่หน้า LINE ทันที
-    alert('บันทึกข้อมูลเรียบร้อย! ระบบกำลังพาไปที่ LINE (@256jetse)');
-    
-    // ปิด Modal (ถ้ามีฟังก์ชันปิด) และพุ่งไป LINE
-    if (typeof closeEnrollModal === 'function') {
-        closeEnrollModal();
+    // ใช้ระบบคัดลอกข้อความลงในเครื่องอัตโนมัติ แล้วพาไป LINE
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('คัดลอกข้อมูลสมัครเรียนเรียบร้อย!\n\n👉 ระบบจะพาไปที่ LINE (@256jetse)\nให้แตะค้างที่ช่องพิมพ์ในแชทแล้วกด "วาง" (Paste) เพื่อส่งข้อความได้เลยครับ');
+            window.location.href = 'https://line.me/R/ti/p/@256jetse';
+            if (typeof closeEnrollModal === 'function') closeEnrollModal();
+        }).catch(err => {
+            fallbackCopyAndSend(text);
+        });
+    } else {
+        fallbackCopyAndSend(text);
     }
-    
+}
+
+function fallbackCopyAndSend(text) {
+    // กรณีเบราว์เซอร์เก่า จะใช้กล่องข้อความให้ก๊อปปี้เองเพื่อความชัวร์
+    prompt("คัดลอกข้อความด้านล่างนี้เพื่อส่งให้แอดมินใน LINE:", text);
     window.location.href = 'https://line.me/R/ti/p/@256jetse';
+    if (typeof closeEnrollModal === 'function') closeEnrollModal();
 }
 
         function submitCustomTopics() {
