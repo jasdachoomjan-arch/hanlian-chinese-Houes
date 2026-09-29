@@ -652,19 +652,31 @@
         return;
     }
 
-    // ดึงค่าตัวเลือกรูปแบบการเรียนตามที่ผู้ใช้กดเลือกจริง (เช่น ตัวต่อตัว หรือ กลุ่ม)
+    // 1. ดึงชื่อคอร์สตามที่กดสมัครจริง (จากตัวแปร currentCourse หรือ Element ในหน้าเว็บ)
+    let courseName = (typeof currentCourse !== 'undefined' && currentCourse.name) ? currentCourse.name : "ระดับพื้นฐาน";
+
+    // 2. ดึงค่าตัวเลือก/รูปแบบตามที่คลิกเลือกจริง (รองรับทั้ง Element ID 'courseOption' หรือประเภท Radio/Dropdown อื่นๆ)
     let selectedOption = "ตัวต่อตัว"; 
-    const optionElement = document.getElementById('courseOption'); // ปรับ ID ให้ตรงกับหน้า HTML ของคุณถ้าจำเป็น
+    const optionElement = document.getElementById('courseOption'); 
     if (optionElement) {
         selectedOption = optionElement.value;
+    } else {
+        // เผื่อกรณีใช้ Radio Button ที่เลือกอยู่
+        const checkedRadio = document.querySelector('input[name="courseOption"]:checked');
+        if (checkedRadio) {
+            selectedOption = checkedRadio.value;
+        }
     }
 
+    // 3. ดึงราคาจริงตามคอร์สหรือตัวเลือกที่กด
     let originalPrice = (typeof currentCourse !== 'undefined' && currentCourse.price) ? currentCourse.price : 0;
-    let finalPrice = originalPrice * (1 - appliedDiscountRate);
-    let discountText = (typeof appliedDiscountRate !== 'undefined' && appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
-    let courseName = (typeof currentCourse !== 'undefined' && currentCourse.name) ? currentCourse.name : `ระดับพื้นฐาน`;
+    
+    // คำนวณราคาหลังหักส่วนลด (ถ้ามีส่วนลด)
+    let discountRate = (typeof appliedDiscountRate !== 'undefined') ? appliedDiscountRate : 0;
+    let finalPrice = originalPrice * (1 - discountRate);
+    let discountText = (discountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-    // จัดรูปแบบข้อความตามที่คุณต้องการ พร้อมเพิ่มราคาคอร์ส
+    // จัดรูปแบบข้อความสรุปตามที่คุณต้องการ
     let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                `📚 คอร์ส: ${courseName}\n` +
                `⚙️ ตัวเลือก/รูปแบบ: ${selectedOption}\n` +
@@ -686,6 +698,12 @@
     } else {
         fallbackCopyAndSend(text);
     }
+}
+
+function fallbackCopyAndSend(text) {
+    prompt("คัดลอกข้อความด้านล่างนี้เพื่อส่งให้แอดมินใน LINE:", text);
+    window.location.href = 'https://line.me/R/ti/p/@256jetse';
+    if (typeof closeEnrollModal === 'function') closeEnrollModal();
 }
 
 function fallbackCopyAndSend(text) {
