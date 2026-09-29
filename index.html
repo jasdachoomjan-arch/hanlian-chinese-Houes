@@ -633,7 +633,7 @@
             document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + currencyText;
         }
 
-    function submitEnrollment() {
+   function submitEnrollment() {
     console.log("ปุ่มสมัครถูกกดแล้ว!");
 
     const nameInput = document.getElementById('userName');
@@ -652,13 +652,21 @@
         return;
     }
 
+    // ดึงค่าตัวเลือกคอร์สหรือตัวเลือกย่อย (สมมติว่าใน HTML มีช่องเลือก หรือ Element ที่เก็บค่าตัวเลือก เช่น id="courseOption" หรือดึงจาก currentCourse)
+    let selectedOption = "ปกติ"; // ค่าเริ่มต้น
+    const optionElement = document.getElementById('courseOption'); // เปลี่ยน ID ตามที่ใช้จริงในหน้าเว็บของคุณ ถ้ามี
+    if (optionElement) {
+        selectedOption = optionElement.value;
+    }
+
     let finalPrice = (typeof currentCourse !== 'undefined' && currentCourse.price) ? currentCourse.price * (1 - appliedDiscountRate) : 0;
     let discountText = (typeof appliedDiscountRate !== 'undefined' && appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
     let courseName = (typeof currentCourse !== 'undefined' && currentCourse.name) ? currentCourse.name : `คอร์สเรียนภาษาจีน`;
 
-    // ข้อความสรุปรายละเอียดทั้งหมด
+    // ข้อความสรุปรายละเอียด พร้อมระบุคอร์สและตัวเลือกที่เลือก
     let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                `📚 คอร์ส: ${courseName}\n` +
+               `⚙️ ตัวเลือก/รูปแบบ: ${selectedOption}\n` +
                `💰 ราคาหลังหักส่วนลด: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
                `👤 ชื่อผู้สมัคร: ${name}\n` +
                `📞 เบอร์โทร: ${phone}\n` +
@@ -676,6 +684,12 @@
     } else {
         fallbackCopyAndSend(text);
     }
+}
+
+function fallbackCopyAndSend(text) {
+    prompt("คัดลอกข้อความด้านล่างนี้เพื่อส่งให้แอดมินใน LINE:", text);
+    window.location.href = 'https://line.me/R/ti/p/@256jetse';
+    if (typeof closeEnrollModal === 'function') closeEnrollModal();
 }
 
 function fallbackCopyAndSend(text) {
