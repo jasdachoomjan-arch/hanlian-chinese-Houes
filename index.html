@@ -634,7 +634,7 @@
             document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + currencyText;
         }
 
-   function submitEnrollment() {
+function submitEnrollment() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
     const addressInput = document.getElementById('userAddress');
@@ -665,17 +665,20 @@
                `🏠 ที่อยู่: ${address}\n` +
                `💻 รูปแบบการเรียน: ออนไลน์ 100%`;
 
-    // คัดลอกข้อความลงคลิปบอร์ด แล้วเด้งเปิดหน้า LINE ทันที
+    // 1. คัดลอกข้อความลงคลิปบอร์ด
     navigator.clipboard.writeText(text).then(() => {
-        alert('✅ คัดลอกรายละเอียดแล้ว!\n👉 กำลังพาไปที่ LINE (@256jetse)\nกดยืนยัน "วาง" ข้อความในแชทส่งหาแอดมินได้เลยครับ');
-        
-        // สั่งเปิดลิงก์ LINE ทันทีหลังกด OK จากหน้าต่างเตือน
-        window.location.href = 'https://line.me/R/ti/p/@256jetse';
+        console.log('Copied to clipboard');
     }).catch(err => {
-        // เผื่อกรณีเบราว์เซอร์บล็อกการคัดลอกอัตโนมัติ
-        prompt("คัดลอกข้อความด้านล่างนี้ส่งให้แอดมินใน LINE:", text);
-        window.location.href = 'https://line.me/R/ti/p/@256jetse';
+        console.log('Copy failed', err);
     });
+
+    // 2. ป้องกันหน้าต่าง Modal ค้าง (เช็คเผื่อมีฟังก์ชันนี้)
+    if (typeof closeEnrollModal === 'function') {
+        try { closeEnrollModal(); } catch(e) {}
+    }
+
+    // 3. สั่งเด้งไป LINE ทันทีแบบไม่ติดบล็อก (ใช้ location.replace เพื่อบังคับเปลี่ยนหน้า)
+    window.location.replace('https://line.me/R/ti/p/@256jetse');
 }
 
 function fallbackCopyAndSend(text) {
