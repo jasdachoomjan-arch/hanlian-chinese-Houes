@@ -639,7 +639,10 @@ function submitEnrollment() {
     const phoneInput = document.getElementById('userPhone');
     const addressInput = document.getElementById('userAddress');
 
-    if (!nameInput || !phoneInput) return;
+    if (!nameInput || !phoneInput) {
+        alert('ไม่พบช่องกรอกข้อมูล กรุณาตรวจสอบหน้าเว็บครับ');
+        return;
+    }
 
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
@@ -653,7 +656,7 @@ function submitEnrollment() {
     let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
     let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-    // ข้อความสรุปรายละเอียดส่งเข้า LINE
+    // ข้อความสรุปรายละเอียดทั้งหมด
     let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                `📚 หมวดหมู่: ${currentCourse.category}\n` +
                `📌 ระดับ: ${currentCourse.level}\n` +
@@ -665,20 +668,23 @@ function submitEnrollment() {
                `🏠 ที่อยู่: ${address}\n` +
                `💻 รูปแบบการเรียน: ออนไลน์ 100%`;
 
-    // 1. คัดลอกข้อความลงคลิปบอร์ด
-    navigator.clipboard.writeText(text).then(() => {
-        console.log('Copied to clipboard');
-    }).catch(err => {
-        console.log('Copy failed', err);
-    });
+    // 1. บันทึกลงคลิปบอร์ดอัตโนมัติ
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(err => console.log('Clipboard error:', err));
+    }
 
-    // 2. ป้องกันหน้าต่าง Modal ค้าง (เช็คเผื่อมีฟังก์ชันนี้)
+    // 2. ปิด Modal (ถ้ามีฟังก์ชันนี้ในเว็บคุณ)
     if (typeof closeEnrollModal === 'function') {
         try { closeEnrollModal(); } catch(e) {}
     }
 
-    // 3. สั่งเด้งไป LINE ทันทีแบบไม่ติดบล็อก (ใช้ location.replace เพื่อบังคับเปลี่ยนหน้า)
-    window.location.replace('https://line.me/R/ti/p/@256jetse');
+    // 3. ใช้ลิงก์ LINE Official แบบส่งข้อความพ่วง (Line URI Scheme)
+    // เมธอดนี้พอกดปุ่ม มันจะพาไปเปิดแอป LINE ทันที
+    let encodedText = encodeURIComponent(text);
+    let lineUrl = `https://line.me/R/msg/text/?${encodedText}`;
+
+    // สั่งเปิดหน้า LINE ทันที
+    window.location.href = lineUrl;
 }
 
 function fallbackCopyAndSend(text) {
