@@ -512,128 +512,79 @@
 
     <!-- JavaScript Logic -->
     <script>
-        let currentLang = 'th';
+       // ตัวเก็บข้อมูลคอร์สที่ผู้ใช้เลือกปัจจุบัน
+let currentCourse = {
+    category: "ภาษาจีนพื้นฐาน",
+    level: "ระดับพื้นฐาน",
+    type: "ตัวต่อตัว",
+    price: 2500 
+};
+let appliedDiscountRate = 0; // 0 คือยังไม่ลด, 0.1 คือลด 10%
 
-        function switchLang(lang) {
-            currentLang = lang;
-            const thBtn = document.getElementById('langThBtn');
-            const enBtn = document.getElementById('langEnBtn');
+// ฟังก์ชันสำหรับเลือกคอร์ส (เมื่อคลิกปุ่มเลือกคอร์สต่างๆ)
+function selectCourse(category, level, type, price) {
+    currentCourse.category = category;
+    currentCourse.level = level;
+    
+    // ถ้าหมวดหมู่เป็น HSK บังคับรูปแบบเป็น "ตัวต่อตัว" เสมอ
+    if (category.includes("HSK")) {
+        currentCourse.type = "ตัวต่อตัว";
+    } else {
+        currentCourse.type = type;
+    }
+    
+    currentCourse.price = price;
+    updatePriceDisplay(); // สั่งอัปเดตหน้าจอทันที
+}
 
-            if (lang === 'th') {
-                thBtn.className = 'px-2 py-0.5 rounded bg-gold-500 text-emerald-950 font-bold text-xs transition';
-                enBtn.className = 'px-2 py-0.5 rounded bg-emerald-900 text-amber-100 font-semibold text-xs transition';
-            } else {
-                enBtn.className = 'px-2 py-0.5 rounded bg-gold-500 text-emerald-950 font-bold text-xs transition';
-                thBtn.className = 'px-2 py-0.5 rounded bg-emerald-900 text-amber-100 font-semibold text-xs transition';
-            }
+// ฟังก์ชันตรวจสอบโค้ดส่วนลด HANLIAN10
+function applyDiscountCode() {
+    const codeInput = document.getElementById('discountCodeInput');
+    if (!codeInput) return;
+    
+    const code = codeInput.value.trim();
 
-            document.querySelectorAll('[data-th]').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (text) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = text;
-                    } else {
-                        el.innerHTML = text;
-                    }
-                }
-            });
+    if (code === "HANLIAN10") {
+        appliedDiscountRate = 0.1; // ลด 10%
+        alert('🎉 ใช้โค้ดส่วนลดสำเร็จ! (ลด 10%)');
+    } else {
+        appliedDiscountRate = 0;
+        alert('❌ รหัสส่วนลดไม่ถูกต้อง');
+    }
+    updatePriceDisplay();
+}
+
+// ฟังก์ชันอัปเดตการแสดงผลราคาและชื่อคอร์สบนหน้าเว็บ
+function updatePriceDisplay() {
+    const originalPriceEl = document.getElementById('originalPrice');
+    const finalPriceEl = document.getElementById('finalPrice');
+    const courseDetailEl = document.getElementById('selectedCourseDetail');
+
+    // แสดงรายละเอียดคอร์สที่เลือก
+    let fullCourseName = `${currentCourse.category} - ${currentCourse.level} (${currentCourse.type})`;
+    if (courseDetailEl) courseDetailEl.innerText = fullCourseName;
+
+    let originalPrice = currentCourse.price;
+    let finalPrice = originalPrice * (1 - appliedDiscountRate);
+
+    if (appliedDiscountRate > 0) {
+        if (originalPriceEl) {
+            originalPriceEl.innerHTML = `<del style="color: #888;">${originalPrice.toLocaleString()} บาท</del>`;
         }
-
-        // กำหนดข้อมูลตัวเลือกของแต่ละคอร์สตามโครงสร้างจริง
-        const courseDataMap = {
-            'foundation': [
-                { nameTh: 'ระดับพื้นฐาน - ตัวต่อตัว (12 ชม.) - 4,500 บาท', nameEn: 'Foundation - One to One (12 hrs) - 4,500 THB', price: 4500 },
-                { nameTh: 'ระดับพื้นฐาน - กลุ่ม 2 คน (12 ชม.) - 3,500 บาท', nameEn: 'Foundation - Group of 2 (12 hrs) - 3,500 THB', price: 3500 },
-                { nameTh: 'ระดับพื้นฐาน -กลุ่ม 3 คน (12 ชม.) - 3,000 บาท', nameEn: 'Foundation - Group of 3 (12 hrs) - 3,000 THB', price: 3000 },
-                { nameTh: 'ระดับพื้นฐาน - กลุ่ม 4 คน (12 ชม.) - 2,500 บาท', nameEn: 'Foundation - Group of 4 (12 hrs) - 2,500 THB', price: 2500 }
-            ],
-            'advanced': [
-                { nameTh: 'ระดับขั้นสูง - ตัวต่อตัว (12 ชม.) - 5,500 บาท', nameEn: 'Advanced - One to One (12 hrs) - 5,500 THB', price: 5500 },
-                { nameTh: 'ระดับขั้นสูง - กลุ่ม 2 คน (12 ชม.) - 4,500 บาท', nameEn: 'Advanced - Group of 2 (12 hrs) - 4,500 THB', price: 4500 },
-                { nameTh: 'ระดับขั้นสูง - กลุ่ม 3 คน (12 ชม.) - 4,000 บาท', nameEn: 'Advanced - Group of 3 (12 hrs) - 4,000 THB', price: 4000 },
-                { nameTh: 'ระดับขั้นสูง - กลุ่ม 4 คน (12 ชม.) - 3,500 บาท', nameEn: 'Advanced - Group of 4 (12 hrs) - 3,500 THB', price: 3500 }
-            ],
-            'hsk': [
-                { nameTh: 'ติวสอบ HSK 1-3 (12 ชม.) - 5,500 บาท', nameEn: 'HSK 1-3 Prep (12 hrs) - 5,500 THB', price: 5500 },
-                { nameTh: 'ติวสอบ HSK 4-5 (12 ชม.) - 6,500 บาท', nameEn: 'HSK 4-5 Prep (12 hrs) - 6,500 THB', price: 6500 }
-            ]
-        };
-
-        let appliedDiscountRate = 0;
-
-        function openEnrollModal(courseKey) {
-            appliedDiscountRate = 0;
-            document.getElementById('userName').value = '';
-            document.getElementById('userAge').value = '';
-            document.getElementById('userPhone').value = '';
-            document.getElementById('userAddress').value = '';
-            document.getElementById('discountCode').value = '';
-            document.getElementById('discountMsg').innerText = '';
-
-            const container = document.getElementById('modalCourseOptions');
-            container.innerHTML = '';
-
-            const options = courseDataMap[courseKey] || courseDataMap['foundation'];
-            options.forEach((opt, index) => {
-                const labelText = currentLang === 'th' ? opt.nameTh : opt.nameEn;
-                const div = document.createElement('label');
-                div.className = 'flex items-center space-x-2 text-xs text-slate-700 cursor-pointer bg-white p-2.5 rounded-lg border border-slate-200 hover:border-emerald-600 transition';
-                div.innerHTML = `
-                    <input type="radio" name="modal_course_radio" value="${opt.nameTh}" data-price="${opt.price}" class="modal-course-radio text-emerald-700 focus:ring-gold-500" ${index === 0 ? 'checked' : ''}>
-                    <span class="flex-1 font-medium">${labelText}</span>
-                `;
-                container.appendChild(div);
-            });
-
-            // ผูก Event ให้ radio ใหม่
-            document.querySelectorAll('.modal-course-radio').forEach(radio => {
-                radio.addEventListener('change', updateTotalPrice);
-            });
-
-            updateTotalPrice();
-            document.getElementById('enrollModal').classList.remove('hidden');
-            document.getElementById('enrollModal').classList.add('flex');
+        if (finalPriceEl) {
+            finalPriceEl.innerHTML = `<span style="color: #27ae60; font-weight: bold;">${finalPrice.toLocaleString()} บาท (ลด 10%)</span>`;
         }
-
-        function closeEnrollModal() {
-            document.getElementById('enrollModal').classList.remove('flex');
-            document.getElementById('enrollModal').classList.add('hidden');
+    } else {
+        if (originalPriceEl) {
+            originalPriceEl.innerHTML = `${originalPrice.toLocaleString()} บาท`;
         }
-
-        function calculateTotalPrice() {
-            let selected = document.querySelector('.modal-course-radio:checked');
-            if (selected) {
-                return parseInt(selected.getAttribute('data-price') || 0);
-            }
-            return 0;
+        if (finalPriceEl) {
+            finalPriceEl.innerHTML = ``;
         }
+    }
+}
 
-        function applyDiscount() {
-            const code = document.getElementById('discountCode').value.trim().toUpperCase();
-            const msgEl = document.getElementById('discountMsg');
-
-            if (code === 'HANLIAN10') {
-                appliedDiscountRate = 0.10;
-                msgEl.className = 'text-xs mt-1.5 font-semibold text-emerald-600';
-                msgEl.innerText = currentLang === 'th' ? '✓ ใช้โค้ดสำเร็จ! ลด 10%' : '✓ Discount code applied! 10% off';
-            } else if (code === '') {
-                appliedDiscountRate = 0;
-                msgEl.innerText = '';
-            } else {
-                appliedDiscountRate = 0;
-                msgEl.className = 'text-xs mt-1.5 font-semibold text-rose-600';
-                msgEl.innerText = currentLang === 'th' ? '✕ รหัสส่วนลดไม่ถูกต้อง (ใช้ได้เฉพาะ HANLIAN10)' : '✕ Invalid code (Use HANLIAN10)';
-            }
-            updateTotalPrice();
-        }
-
-        function updateTotalPrice() {
-            let rawTotal = calculateTotalPrice();
-            let finalPrice = rawTotal * (1 - appliedDiscountRate);
-            const currencyText = currentLang === 'th' ? ' บาท' : ' THB';
-            document.getElementById('finalPriceDisplay').innerText = finalPrice.toLocaleString() + currencyText;
-        }
-
+// ฟังก์ชันส่งข้อมูลสมัครเรียน (คัดลอกข้อความและเปิด LINE ทันที)
 function submitEnrollment() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
@@ -656,7 +607,7 @@ function submitEnrollment() {
     let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
     let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-    // ข้อความสรุปรายละเอียดทั้งหมด
+    // ข้อความสรุปรายละเอียด
     let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                `📚 หมวดหมู่: ${currentCourse.category}\n` +
                `📌 ระดับ: ${currentCourse.level}\n` +
@@ -668,24 +619,21 @@ function submitEnrollment() {
                `🏠 ที่อยู่: ${address}\n` +
                `💻 รูปแบบการเรียน: ออนไลน์ 100%`;
 
-    // 1. บันทึกลงคลิปบอร์ดอัตโนมัติ
+    // คัดลอกลงคลิปบอร์ด
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(err => console.log('Clipboard error:', err));
+        navigator.clipboard.writeText(text).catch(err => console.log(err));
     }
 
-    // 2. ปิด Modal (ถ้ามีฟังก์ชันนี้ในเว็บคุณ)
-    if (typeof closeEnrollModal === 'function') {
-        try { closeEnrollModal(); } catch(e) {}
-    }
-
-    // 3. ใช้ลิงก์ LINE Official แบบส่งข้อความพ่วง (Line URI Scheme)
-    // เมธอดนี้พอกดปุ่ม มันจะพาไปเปิดแอป LINE ทันที
+    // เปิด LINE ทันที
     let encodedText = encodeURIComponent(text);
     let lineUrl = `https://line.me/R/msg/text/?${encodedText}`;
-
-    // สั่งเปิดหน้า LINE ทันที
     window.location.href = lineUrl;
 }
+
+// เรียกใช้งานตอนโหลดหน้าเว็บครั้งแรกเพื่อให้ราคาแสดงผลทันที
+window.onload = function() {
+    updatePriceDisplay();
+};
 
 function fallbackCopyAndSend(text) {
     prompt("คัดลอกข้อความด้านล่างนี้เพื่อส่งให้แอดมินใน LINE:", text);
@@ -743,5 +691,6 @@ function fallbackCopyAndSend(text) {
             window.open(lineUrl, '_blank');
         }
     </script>
+    
 </body>
 </html>
