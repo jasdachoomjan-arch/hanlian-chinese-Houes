@@ -109,7 +109,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-emerald-950 mb-4" data-th="คอร์สเรียนภาษาจีนของเรา" data-en="Tuition Fee Structure (12 Hours / Month)">คอร์สเรียนภาษาจีนของเรา</h2>
-                <p class="text-slate-600 text-base" data-th="เลือกแพ็กเกจและรูปแบบการเรียนที่เหมาะกับคุณ เรียนสดผ่านระบบ Zoom Classroom" data-en="Choose the package and learning format that suits you. Live lessons via Zoom Classroom.">เลือกแพ็กเกจและรูปแบบการเรียนที่เหมาะกับคุณ เรียนสดผ่านระบบ Zoom Classroom[cite: 1]</p>
+                <p class="text-slate-600 text-base" data-th="เลือกแพ็กเกจและรูปแบบการเรียนที่เหมาะกับคุณ เรียนสดผ่านระบบ Zoom Classroom" data-en="Choose the package and learning format that suits you. Live lessons via Zoom Classroom.">เลือกแพ็กเกจและรูปแบบการเรียนที่เหมาะกับคุณ เรียนสดผ่านระบบ Zoom Classroom</p>
                 <div class="w-24 h-1 bg-gold-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
@@ -439,7 +439,14 @@
             <p class="text-xs text-slate-500">© 2026 Han-Lian Chinese Language House. Online 100% All rights reserved. LINE OA: @256jetse</p>
         </div>
     </footer>
-
+<!-- Notification Toast for Copy -->
+    <div id="copyToast" class="fixed bottom-6 right-6 z-50 bg-emerald-900 text-white px-6 py-3 rounded-2xl shadow-2xl border border-gold-500/50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3">
+        <span class="text-gold-400 text-xl">✓</span>
+        <div>
+            <p class="font-bold text-sm">คัดลอกข้อมูลเรียบร้อย!</p>
+            <p class="text-xs text-emerald-200">กำลังเปิด LINE เพื่อให้ท่านกดวาง (Paste) ส่งข้อมูลครับ</p>
+        </div>
+    </div>
     <!-- Enrollment Modal -->
     <div id="enrollModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gold-500/30 relative animate-in fade-in zoom-in duration-200 max-h-[90vh] overflow-y-auto">
@@ -621,7 +628,54 @@
             updateModalPrice();
         }
 
-        // ส่งข้อมูลยืนยันการสมัครเข้า LINE
+       // แสดง Toast แจ้งเตือนเมื่อคัดลอกสำเร็จ
+        function showCopyToast() {
+            const toast = document.getElementById('copyToast');
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+        }
+
+        // ฟังก์ชันคัดลอกข้อความและเปิด LINE
+        function copyAndOpenLine(textToCopy) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showCopyToast();
+                    setTimeout(() => {
+                        window.open('https://line.me/R/ti/p/@256jetse', '_blank');
+                    }, 800);
+                }).catch(err => {
+                    fallbackCopyText(textToCopy);
+                });
+            } else {
+                fallbackCopyText(textToCopy);
+            }
+        }
+
+        // Fallback สำหรับเบราว์เซอร์เก่า
+        function fallbackCopyText(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showCopyToast();
+                setTimeout(() => {
+                    window.open('https://line.me/R/ti/p/@256jetse', '_blank');
+                }, 800);
+            } catch (err) {
+                alert('ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาคัดลอกข้อความด้วยตนเองครับ');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // ส่งข้อมูลยืนยันการสมัครเข้า LINE (ปรับมาเรียกใช้ copyAndOpenLine)
         function submitEnrollment() {
             const name = document.getElementById('userName').value.trim();
             const age = document.getElementById('userAge').value.trim();
@@ -650,12 +704,11 @@
                        `🏠 ที่อยู่: ${address || '-'}\n` +
                        `💻 รูปแบบการเรียน: ออนไลน์ 100% ผ่าน Zoom`;
 
-            let encodedText = encodeURIComponent(text);
-            let lineUrl = `https://line.me/R/msg/text/?${encodedText}`;
-            window.location.href = lineUrl;
+            closeEnrollModal();
+            copyAndOpenLine(text);
         }
 
-        // ส่งหัวข้อ Custom Topic ผ่าน LINE
+        // ส่งหัวข้อ Custom Topic ผ่าน LINE (ปรับมาเรียกใช้ copyAndOpenLine)
         function submitCustomTopics() {
             const checkboxes = document.querySelectorAll('input[name="custom_topic"]:checked');
             if (checkboxes.length === 0) {
@@ -672,8 +725,7 @@
                        `หัวข้อที่เลือก:\n` + topics.join('\n') + `\n\n` +
                        `รบกวนแอดมินแนะนำรายละเอียดและตารางเรียนเพิ่มเติมค่ะ/ครับ`;
 
-            let lineUrl = `https://line.me/R/ti/p/@256jetse?text=` + encodeURIComponent(text);
-            window.open(lineUrl, '_blank');
+            copyAndOpenLine(text);
         }
     </script>
 </body>
