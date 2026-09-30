@@ -512,7 +512,7 @@
 
     <!-- JavaScript Logic -->
     <script>
-       // ตัวเก็บข้อมูลคอร์สที่ผู้ใช้เลือกปัจจุบัน
+      // ตัวเก็บข้อมูลคอร์สที่ผู้ใช้เลือกปัจจุบัน
 let currentCourse = {
     category: "ภาษาจีนพื้นฐาน",
     level: "ระดับพื้นฐาน",
@@ -521,12 +521,11 @@ let currentCourse = {
 };
 let appliedDiscountRate = 0; // 0 คือยังไม่ลด, 0.1 คือลด 10%
 
-// ฟังก์ชันสำหรับเลือกคอร์ส (เมื่อคลิกปุ่มเลือกคอร์สต่างๆ)
+// ฟังก์ชันสำหรับเลือกคอร์ส
 function selectCourse(category, level, type, price) {
     currentCourse.category = category;
     currentCourse.level = level;
     
-    // ถ้าหมวดหมู่เป็น HSK บังคับรูปแบบเป็น "ตัวต่อตัว" เสมอ
     if (category.includes("HSK")) {
         currentCourse.type = "ตัวต่อตัว";
     } else {
@@ -534,7 +533,7 @@ function selectCourse(category, level, type, price) {
     }
     
     currentCourse.price = price;
-    updatePriceDisplay(); // สั่งอัปเดตหน้าจอทันที
+    updatePriceDisplay();
 }
 
 // ฟังก์ชันตรวจสอบโค้ดส่วนลด HANLIAN10
@@ -545,7 +544,7 @@ function applyDiscountCode() {
     const code = codeInput.value.trim();
 
     if (code === "HANLIAN10") {
-        appliedDiscountRate = 0.1; // ลด 10%
+        appliedDiscountRate = 0.1;
         alert('🎉 ใช้โค้ดส่วนลดสำเร็จ! (ลด 10%)');
     } else {
         appliedDiscountRate = 0;
@@ -554,13 +553,12 @@ function applyDiscountCode() {
     updatePriceDisplay();
 }
 
-// ฟังก์ชันอัปเดตการแสดงผลราคาและชื่อคอร์สบนหน้าเว็บ
+// ฟังก์ชันอัปเดตราคาบนหน้าเว็บ
 function updatePriceDisplay() {
     const originalPriceEl = document.getElementById('originalPrice');
     const finalPriceEl = document.getElementById('finalPrice');
     const courseDetailEl = document.getElementById('selectedCourseDetail');
 
-    // แสดงรายละเอียดคอร์สที่เลือก
     let fullCourseName = `${currentCourse.category} - ${currentCourse.level} (${currentCourse.type})`;
     if (courseDetailEl) courseDetailEl.innerText = fullCourseName;
 
@@ -584,14 +582,14 @@ function updatePriceDisplay() {
     }
 }
 
-// ฟังก์ชันส่งข้อมูลสมัครเรียน (คัดลอกข้อความและเปิด LINE ทันที)
+// ฟังก์ชันกดส่งข้อมูล (ทำงานเมื่อคลิกปุ่มยืนยัน)
 function submitEnrollment() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
     const addressInput = document.getElementById('userAddress');
 
     if (!nameInput || !phoneInput) {
-        alert('ไม่พบช่องกรอกข้อมูล กรุณาตรวจสอบหน้าเว็บครับ');
+        alert('ไม่พบช่องกรอกชื่อหรือเบอร์โทรครับ');
         return;
     }
 
@@ -607,7 +605,6 @@ function submitEnrollment() {
     let finalPrice = currentCourse.price * (1 - appliedDiscountRate);
     let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
-    // ข้อความสรุปรายละเอียด
     let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                `📚 หมวดหมู่: ${currentCourse.category}\n` +
                `📌 ระดับ: ${currentCourse.level}\n` +
@@ -619,22 +616,21 @@ function submitEnrollment() {
                `🏠 ที่อยู่: ${address}\n` +
                `💻 รูปแบบการเรียน: ออนไลน์ 100%`;
 
-    // คัดลอกลงคลิปบอร์ด
+    // คัดลอกข้อความลงคลิปบอร์ด
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).catch(err => console.log(err));
     }
 
-    // เปิด LINE ทันที
+    // เด้งไป LINE ทันที
     let encodedText = encodeURIComponent(text);
     let lineUrl = `https://line.me/R/msg/text/?${encodedText}`;
     window.location.href = lineUrl;
 }
 
-// เรียกใช้งานตอนโหลดหน้าเว็บครั้งแรกเพื่อให้ราคาแสดงผลทันที
+// รันอัปเดตราคาเริ่มต้นเมื่อโหลดหน้าเว็บ
 window.onload = function() {
     updatePriceDisplay();
 };
-
 function fallbackCopyAndSend(text) {
     prompt("คัดลอกข้อความด้านล่างนี้เพื่อส่งให้แอดมินใน LINE:", text);
     window.location.href = 'https://line.me/R/ti/p/@256jetse';
