@@ -342,7 +342,7 @@
                 <div class="bg-gradient-to-r from-emerald-900 to-emerald-950 rounded-xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
                     <div>
                         <h4 class="font-bold text-gold-300 text-base mb-1" data-th="ต้องการหลักสูตรเฉพาะทางนี้?" data-en="Interested in this specialized curriculum?">ต้องการหลักสูตรเฉพาะทางนี้?</h4>
-                        <p class="text-xs text-emerald-100" data-th="กดปุ่มด้านข้างเพื่อส่งหัวข้อที่เลือกตรงเข้า LINE แอดมินเพื่อประเมินหลักสูตรทันที" data-en="Click the button to send your selected topics directly to admin via LINE for instant curriculum assessment.">กดปุ่มด้านข้างเพื่อส่งหัวข้อที่เลือกตรงเข้า LINE แอดมินเพื่อประเมินหลักสูตรทันที</p>
+                        <p class="text-xs text-emerald-100" data-th="กดปุ่มด้านข้างเพื่อคัดลอกส่งหัวข้อที่เลือกตรงเข้า LINE แอดมินเพื่อประเมินหลักสูตรทันที" data-en="Click the side button to copy and send your selected topic directly to the admin LINE for an instant course evaluation.">กดปุ่มด้านข้างเพื่อคัดลอกส่งหัวข้อที่เลือกตรงเข้า LINE แอดมินเพื่อประเมินหลักสูตรทันที</p>
                     </div>
                     <button onclick="submitCustomTopics()" class="w-full sm:w-auto bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-emerald-950 font-bold px-6 py-3 rounded-xl shadow-lg transition whitespace-nowrap" data-th="ส่งหัวข้อที่เลือกผ่าน LINE" data-en="Send Selected Topics via LINE">
                         ส่งหัวข้อที่เลือกผ่าน LINE
@@ -482,7 +482,7 @@
         <span class="text-gold-400 text-xl">✓</span>
         <div>
             <p class="font-bold text-sm" data-th="คัดลอกข้อมูลเรียบร้อย!" data-en="Data copied successfully!">คัดลอกข้อมูลเรียบร้อย!</p>
-            <p class="text-xs text-emerald-200" data-th="กำลังเปิด LINE เพื่อให้ท่านกดวาง (Paste) ส่งข้อมูลครับ" data-en="Opening LINE for you to paste and send data.">กำลังเปิด LINE เพื่อให้ท่านกดวาง (Paste) ส่งข้อมูลครับ</p>
+            <p class="text-xs text-emerald-200" data-th="เปิดLINEเพื่อกดวาง(Paste)ส่งข้อมูลครับ" data-en="Opening LINE for you to paste and send data.">เปิดLINEเพื่อกดวาง(Paste)ส่งข้อมูลครับ</p>
         </div>
     </div>
 
@@ -499,42 +499,127 @@
             <div class="space-y-4 mb-6">
                 <!-- Course Specific Options Container -->
                 <div class="bg-emerald-50/70 p-4 rounded-xl border border-emerald-200">
-                    <label class="block text-xs font-bold text-emerald-950 uppercase mb-2" data-th="✦ เลือกรูปแบบคอร์สและราคา (เลือกได้ 1 ตัวเลือก)" data-en="✦ Select Course Format & Price (Choose 1)">✦ เลือกรูปแบบคอร์สและราคา (เลือกได้ 1 ตัวเลือก)</label>
-                    <div id="modalCourseOptions" class="space-y-2.5 max-h-52 overflow-y-auto pr-1">
+                    <label class="block text-xs font-bold text-emerald-950 uppercase mb-2">✦ เลือกรูปแบบคอร์สและราคา (เลือกได้ 1 ตัวเลือก)</label>
+                    <div id="modalCourseOptions" class="space-y-2.5 max-h-40 overflow-y-auto pr-1">
                         <!-- Dynamic options inserted via JS -->
                     </div>
                 </div>
 
+                <!-- 1. เลือกวันที่ต้องการเรียน (เลือกได้มากกว่า 1 วัน / อย่างน้อย 3 วัน) -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <label class="block text-xs font-bold text-slate-800 uppercase mb-1">
+                        1. เลือกวันที่ต้องการเรียน <span class="text-amber-600 font-normal normal-case">(เลือกได้อย่างน้อย 3 วัน/สัปดาห์)</span>
+                    </label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2">
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันจันทร์" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันจันทร์</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันอังคาร" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันอังคาร</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันพุธ" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันพุธ</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันพฤหัสบดี" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันพฤหัสบดี</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันศุกร์" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันศุกร์</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันเสาร์" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันเสาร์</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="checkbox" name="class_days" value="วันอาทิตย์" class="rounded text-emerald-700 focus:ring-gold-500">
+                            <span>วันอาทิตย์</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 2. เลือกช่วงเวลาที่ต้องการเรียน (เลือกได้เพียง 1 ช่วงเวลา) -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <label class="block text-xs font-bold text-slate-800 uppercase mb-1">
+                        2. เลือกช่วงเวลาที่ต้องการเรียน <span class="text-amber-600 font-normal normal-case">(เลือกได้ 1 ช่วงเวลา)</span>
+                    </label>
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="10:00-11:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>10:00 - 11:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="11:00-12:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>11:00 - 12:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="14:00-15:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>14:00 - 15:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="15:00-16:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>15:00 - 16:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="16:00-17:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>16:00 - 17:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="17:00-18:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>17:00 - 18:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="19:00-20:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>19:00 - 20:00 น.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-emerald-600 text-xs">
+                            <input type="radio" name="class_time" value="20:00-21:00 น." class="text-emerald-700 focus:ring-gold-500">
+                            <span>20:00 - 21:00 น.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- หมายเหตุแจ้งเตือน -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded-r-xl">
+                    <p class="text-[11px] sm:text-xs text-red leading-relaxed">
+                        <strong>หมายเหตุ:</strong> การเลือกเวลาที่ต้องการยังไม่ถือเป็นการยืนยันตารางเรียน ทั้งนี้ต้องได้รับการยืนยันจากผู้สอนก่อน
+                    </p>
+                </div>
+
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1" data-th="ชื่อ - นามสกุล ผู้เรียน (Name)" data-en="Full Name">ชื่อ - นามสกุล ผู้เรียน (Name)</label>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">ชื่อ - นามสกุล ผู้เรียน (Name)</label>
                     <input type="text" id="userName" placeholder="กรอกชื่อและนามสกุลของคุณ" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1" data-th="อายุ (Age)" data-en="Age">อายุ (Age)</label>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">อายุ (Age)</label>
                         <input type="number" id="userAge" placeholder="อายุ" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1" data-th="เบอร์โทร (Mobile)" data-en="Mobile">เบอร์โทร (Mobile)</label>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">เบอร์โทร (Mobile)</label>
                         <input type="tel" id="userPhone" placeholder="08XXXXXXXX" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1" data-th="ที่อยู่ (Address)" data-en="Address">ที่อยู่ (Address)</label>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">ที่อยู่ (Address)</label>
                     <input type="text" id="userAddress" placeholder="จังหวัด / ที่อยู่ติดต่อ" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1" data-th="รหัสส่วนลด (เฉพาะ HANLIAN10)" data-en="Discount Code (HANLIAN10 only)">รหัสส่วนลด (เฉพาะ HANLIAN10)</label>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">รหัสส่วนลด (เฉพาะ HANLIAN10)</label>
                     <div class="flex gap-2">
                         <input type="text" id="discountCode" placeholder="พิมพ์รหัสส่วนลดที่นี่" class="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 outline-none text-sm uppercase">
-                        <button onclick="applyDiscount()" class="bg-emerald-800 hover:bg-emerald-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition" data-th="ใช้โค้ด" data-en="Apply">ใช้โค้ด</button>
+                        <button onclick="applyDiscount()" class="bg-emerald-800 hover:bg-emerald-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition">ใช้โค้ด</button>
                     </div>
                     <p id="discountMsg" class="text-xs mt-1.5 font-medium"></p>
                 </div>
 
                 <div class="p-4 bg-emerald-50/60 rounded-xl border border-emerald-100 flex justify-between items-center">
                     <div>
-                        <span class="text-xs text-slate-500 block" data-th="ยอดชำระสุทธิ" data-en="Net Total">ยอดชำระสุทธิ</span>
+                        <span class="text-xs text-slate-500 block">ยอดชำระสุทธิ</span>
                         <span id="finalPriceDisplay" class="text-xl font-extrabold text-emerald-950">0 บาท</span>
                     </div>
                     <span class="text-xs bg-emerald-200 text-emerald-900 px-2.5 py-1 rounded-full font-semibold">Zoom Online</span>
@@ -542,12 +627,11 @@
             </div>
 
             <button onclick="submitEnrollment()" class="w-full bg-gradient-to-r from-emerald-800 to-emerald-950 hover:from-emerald-900 hover:to-emerald-900 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-base">
-                <span data-th="ยืนยันการข้อมูลและส่งเข้า LINE (@256jetse)" data-en="Confirm & Send to LINE (@256jetse)">ยืนยันข้อมูลและส่งเข้า LINE (@256jetse)</span>
+                <span>ยืนยันข้อมูลและส่งเข้า LINE (@256jetse)</span>
             </button>
-            <p class="text-center text-[11px] text-slate-400 mt-3" data-th="ระบบจะพาคุณไปยังแอปพลิเคชัน LINE อัตโนมัติเพื่อส่งข้อมูลให้แอดมิน" data-en="The system will automatically take you to the LINE application to send data to the admin.">ระบบจะพาคุณไปยังแอปพลิเคชัน LINE อัตโนมัติเพื่อส่งข้อมูลให้แอดมิน</p>
+            <p class="text-center text-[11px] text-slate-400 mt-3">ระบบจะพาคุณไปยังแอปพลิเคชัน LINE อัตโนมัติเพื่อส่งข้อมูลให้แอดมิน</p>
         </div>
     </div>
-
 
     <!-- JavaScript Logic -->
     <script>
@@ -555,7 +639,7 @@
             foundation: {
                 title: "ระดับพื้นฐาน (Foundation)",
                 options: [
-                    { name: "ตัวต่อตัว (One to One)", price: 4500 },
+                    { name: "ตัวต่อตัว (1-on-1)", price: 4500 },
                     { name: "กลุ่ม 2 คน (หาเพื่อนมาเอง)", price: 3500 },
                     { name: "กลุ่ม 3 คน (หาเพื่อนมาเอง)", price: 3000 },
                     { name: "กลุ่ม 4 คน (หาเพื่อนมาเอง)", price: 2500 }
@@ -564,7 +648,7 @@
             advanced: {
                 title: "ระดับขั้นสูง (Advanced)",
                 options: [
-                    { name: "ตัวต่อตัว (One to One)", price: 5500 },
+                    { name: "ตัวต่อตัว (1-on-1)", price: 5500 },
                     { name: "กลุ่ม 2 คน (หาเพื่อนมาเอง)", price: 4500 },
                     { name: "กลุ่ม 3 คน (หาเพื่อนมาเอง)", price: 4000 },
                     { name: "กลุ่ม 4 คน (หาเพื่อนมาเอง)", price: 3500 }
@@ -590,6 +674,10 @@
             document.getElementById('discountCode').value = '';
             document.getElementById('discountMsg').innerText = '';
             
+            // รีเซ็ตค่าฟอร์มวันและเวลา
+            document.querySelectorAll('input[name="class_days"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('input[name="class_time"]').forEach(rb => rb.checked = false);
+
             renderModalOptions();
             updateModalPrice();
 
@@ -635,8 +723,8 @@
             data.options.forEach((opt, idx) => {
                 let checked = idx === selectedOptionIndex ? 'checked' : '';
                 html += `
-                    <label class="flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 hover:border-emerald-600 cursor-pointer transition">
-                        <div class="flex items-center space-x-3">
+                    <label class="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-600 cursor-pointer transition">
+                        <div class="flex items-center space-x-2">
                             <input type="radio" name="modal_option" value="${idx}" ${checked} onchange="changeSelectedOption(${idx})" class="w-4 h-4 text-emerald-700 focus:ring-gold-500">
                             <span class="text-xs font-semibold text-slate-800">${opt.name}</span>
                         </div>
@@ -720,7 +808,7 @@
                 showCopyToast();
                 setTimeout(() => {
                     window.open('https://line.me/R/ti/p/@256jetse', '_blank');
-                }, 800);
+                }, 10000);
             } catch (err) {
                 alert('ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาคัดลอกข้อความด้วยตนเองครับ');
             }
@@ -738,6 +826,25 @@
                 return;
             }
 
+            // ตรวจสอบข้อมูลวันที่เลือก (เลือกอย่างน้อย 3 วัน)
+            const selectedDays = [];
+            document.querySelectorAll('input[name="class_days"]:checked').forEach(cb => {
+                selectedDays.push(cb.value);
+            });
+
+            if (selectedDays.length < 3) {
+                alert('กรุณาเลือกวันที่ต้องการเรียนอย่างน้อย 3 วัน/สัปดาห์ครับ');
+                return;
+            }
+
+            // ตรวจสอบช่วงเวลาที่เลือก (เลือก 1 ช่วงเวลา)
+            const selectedTimeEl = document.querySelector('input[name="class_time"]:checked');
+            if (!selectedTimeEl) {
+                alert('กรุณาเลือกช่วงเวลาที่ต้องการเรียน 1 ช่วงเวลาครับ');
+                return;
+            }
+            const classTime = selectedTimeEl.value;
+
             const data = courseData[selectedCourseKey];
             const selectedOpt = data.options[selectedOptionIndex];
             const basePrice = selectedOpt.price;
@@ -747,6 +854,8 @@
             let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                        `📚 หลักสูตร: ${data.title}\n` +
                        `📌 รูปแบบ: ${selectedOpt.name}\n` +
+                       `📅 วันที่เรียน: ${selectedDays.join(', ')}\n` +
+                       `⏰ ช่วงเวลาเรียน: ${classTime}\n` +
                        `💰 ราคาปกติ: ${basePrice.toLocaleString()} บาท\n` +
                        `🔥 ยอดชำระสุทธิ: ${finalPrice.toLocaleString()} บาท (โค้ด: ${discountText})\n` +
                        `👤 ชื่อผู้สมัคร: ${name}\n` +
