@@ -64,6 +64,7 @@
             </div>
             <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
                 <a href="#courses" class="hover:text-emerald-700 transition" data-th="อัตราค่าเรียน" data-en="Tuition Fees">อัตราค่าเรียน</a>
+                <a href="#demo-video" class="hover:text-emerald-700 transition" data-th="ตัวอย่างบทเรียน" data-en="Lesson Demo">ตัวอย่างบทเรียน</a>
                 <a href="#instructor" class="hover:text-emerald-700 transition" data-th="ประวัติผู้สอน" data-en="Instructor">ประวัติผู้สอน</a>
                 <a href="#custom-topic" class="hover:text-emerald-700 transition" data-th="จัดหัวข้อเอง (1-on-1)" data-en="Custom Topics (1-on-1)">จัดหัวข้อเอง (1-on-1)</a>
                 <a href="#reviews" class="hover:text-emerald-700 transition" data-th="รีวิวจากผู้เรียน" data-en="Reviews">รีวิวจากผู้เรียน</a>
@@ -237,7 +238,40 @@
         </div>
     </section>
 
-    <!-- Instructor Section -->
+    <!-- Demo Video Section (Separate Section for Lesson Presentation Video in 16:9 Landscape) -->
+    <section id="demo-video" class="py-20 bg-gradient-to-b from-slate-900 to-emerald-950 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-gold-400 font-semibold text-xs tracking-widest uppercase bg-gold-500/20 px-3 py-1 rounded-full border border-gold-500/40" data-th="Lesson Presentation" data-en="Lesson Presentation">Lesson Presentation</span>
+                <h2 class="text-3xl font-bold mt-3 mb-2" data-th="วิดีโอนำเสนอบทเรียนและตัวอย่างการสอน" data-en="Lesson Presentation Video & Teaching Sample">วิดีโอนำเสนอบทเรียนและตัวอย่างการสอน</h2>
+                <p class="text-slate-300 text-sm" data-th="รับชมตัวอย่างบรรยากาศและการอธิบายบทเรียนภาษาจีนเข้าใจง่าย สนุก และนำไปใช้ได้จริง" data-en="Watch a sample of our engaging, easy-to-understand Chinese lesson delivery.">รับชมตัวอย่างบรรยากาศและการอธิบายบทเรียนภาษาจีนเข้าใจง่าย สนุก และนำไปใช้ได้จริง</p>
+            </div>
+
+            <div class="bg-emerald-900/40 border border-gold-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-md space-y-6">
+                <!-- ปรับสัดส่วนวิดีโอเป็นแนวนอน 16:9 (aspect-video) ที่นี่ -->
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-2 border-gold-500/50 bg-black">
+                    <video controls autoplay muted loop playsinline class="w-full h-full object-contain">
+                        <source src="https://www.image2url.com/r2/default/videos/1790910085139-d962462c-3cb0-48d6-9d48-7a5fd2577d5a.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="text-center space-y-3">
+                    <span class="inline-block bg-gold-500 text-emerald-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Highlight Content</span>
+                    <h3 class="text-2xl font-bold text-gold-300" data-th="เทคนิคการสอนเน้นความหมาย ใช้ได้ทันที" data-en="Meaning-First Method: Ready to Use">เทคนิคการสอนเน้นความหมาย ใช้ได้ทันที</h3>
+                    <p class="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed" data-th="วิดีโอนี้แสดงตัวอย่างการสอนในคลาสออนไลน์ของเรา ที่ช่วยให้ผู้เรียนเข้าใจโครงสร้างประโยค การออกเสียงพินอินอย่างถูกต้อง และสามารถนำไปปรับใช้ในการสนทนาจริงกับชาวจีนได้ทันที" data-en="This video demonstrates our online class delivery, helping learners master sentence structures, correct pinyin pronunciation, and apply them immediately in real conversations.">
+                        วิดีโอนี้แสดงตัวอย่างการสอนในคลาสออนไลน์ของเรา ที่ช่วยให้ผู้เรียนเข้าใจโครงสร้างประโยค การออกเสียงพินอินอย่างถูกต้อง และสามารถนำไปปรับใช้ในการสนทนาจริงกับชาวจีนได้ทันที
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://line.me/R/ti/p/@256jetse" target="_blank" class="inline-block bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-emerald-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm" data-th="สนใจสมัครเรียนกลุ่มนี้ติดต่อ LINE" data-en="Enroll in this course via LINE">
+                            สนใจสมัครเรียนติดต่อ LINE OA
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor Section (Kept Original Image Only) -->
     <section id="instructor" class="py-20 bg-emerald-50/50 border-y border-emerald-100">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -246,14 +280,16 @@
                 <p class="text-slate-600 text-sm" data-th="ผู้เชี่ยวชาญด้านการสอนภาษาจีน เน้นความเข้าใจ ประยุกต์ใช้ได้จริง และใส่ใจผู้เรียนทุกท่าน" data-en="Chinese teaching expert focusing on comprehension, practical application, and personalized care.">ผู้เชี่ยวชาญด้านการสอนภาษาจีน เน้นความเข้าใจ ประยุกต์ใช้ได้จริง และใส่ใจผู้เรียนทุกท่าน</p>
             </div>
 
-            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div class="md:col-span-5 flex justify-center">
-                    <div class="relative">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- ส่วนแสดงรูปภาพเดิมเดี่ยวๆ -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-80 sm:w-96">
                         <div class="absolute -inset-2 bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-300 rounded-2xl blur-sm opacity-80"></div>
-                        <img src="https://cdn.phototourl.com/member/2026-10-01-8349788a-b8d0-4605-9d3a-43c40310905d.png" alt="ผู้สอน บ้านภาษาจีนหาญเหลียน" class="relative w-64 h-64 sm:w-72 sm:h-72 object-cover rounded-2xl shadow-md border-2 border-white">
+                        <img src="https://cdn.phototourl.com/member/2026-10-01-8349788a-b8d0-4605-9d3a-43c40310905d.png" alt="Dr. Padma Han" class="relative w-full h-auto object-cover rounded-2xl shadow-md border-2 border-white">
                     </div>
                 </div>
-                <div class="md:col-span-7 space-y-4">
+
+                <div class="lg:col-span-7 space-y-4">
                     <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full" data-th="ผู้สอนหลัก" data-en="Lead Instructor">ผู้สอนหลัก</span>
                     <h3 class="text-2xl sm:text-3xl font-bold text-emerald-950">Dr. Padma Han 涵莲博士</h3>
                     <p class="text-slate-600 text-sm sm:text-base leading-relaxed" data-th="มุ่งเน้นการถ่ายทอดภาษาจีนด้วยเทคนิคที่เข้าใจง่าย สนุก และนำไปใช้งานได้จริง ไม่ว่าจะเป็นการสนทนาในชีวิตประจำวัน ภาษาจีนเฉพาะทางด้านธุรกิจ โรงแรม รีสอร์ท หรือการเตรียมตัวสอบ HSK" data-en="Focusing on teaching Chinese with easy-to-understand, fun, and practical techniques, whether for daily conversation, business, hotel & resort industry, or HSK preparation.">
@@ -263,9 +299,7 @@
                         <li class="flex items-center" data-th="✓ เทคนิคการสอนแบบเน้นความหมาย (Meaning-First Method)" data-en="✓ Meaning-First Teaching Method">✓ เทคนิคการสอนแบบเน้นความหมาย (Meaning-First Method)</li>
                         <li class="flex items-center" data-th="✓ ออกแบบหลักสูตรให้ตรงกับเป้าหมายของผู้เรียนแต่ละคน" data-en="✓ Customized curriculum tailored to each learner's goals">✓ ออกแบบหลักสูตรให้ตรงกับเป้าหมายของผู้เรียนแต่ละคน</li>
                         <li class="flex items-center" data-th="✓ เป็นกันเอง ใส่ใจทุกรายละเอียดการออกเสียง" data-en="✓ Friendly and attentive to every detail of pronunciation">✓ เป็นกันเอง ใส่ใจทุกรายละเอียดการออกเสียง</li>
-                        <li class="flex items-center" data-th="✓ อาจารย์สามารถพูดหลายภาษา ผู้เข้าใจการเริ่มจากศูนย์
-ใช้ได้คล่องทั้งภาษาจีน อังกฤษ ไทย และมาเลย์ เข้าใจอุปสรรคของผู้เรียนที่ไม่ใช่เจ้าของภาษา" data-en="✓ Fluent in Mandarin, English, Thai, and Malay, with deep insight into how non-Chinese speakers actually learn Chinese">✓ อาจารย์สามารถพูดหลายภาษา ผู้เข้าใจการเริ่มจากศูนย์
-ใช้ได้คล่องทั้งภาษาจีน อังกฤษ ไทย และมาเลย์ เข้าใจอุปสรรคของผู้เรียนที่ไม่ใช่เจ้าของภาษา</li>
+                        <li class="flex items-center" data-th="✓ อาจารย์สามารถพูดหลายภาษา ผู้เข้าใจการเริ่มจากศูนย์ ใช้ได้คล่องทั้งภาษาจีน อังกฤษ ไทย และมาเลย์ เข้าใจอุปสรรคของผู้เรียนที่ไม่ใช่เจ้าของภาษา" data-en="✓ Fluent in Mandarin, English, Thai, and Malay, with deep insight into how non-Chinese speakers actually learn Chinese">✓ อาจารย์สามารถพูดหลายภาษา ผู้เข้าใจการเริ่มจากศูนย์ ใช้ได้คล่องทั้งภาษาจีน อังกฤษ ไทย และมาเลย์ เข้าใจอุปสรรคของผู้เรียนที่ไม่ใช่เจ้าของภาษา</li>
                     </ul>
                 </div>
             </div>
@@ -419,7 +453,7 @@
                     <ol class="space-y-3 text-sm text-emerald-100 list-decimal list-inside">
                         <li data-th="สมัครเรียนผ่านปุ่มในเว็บไซต์หรือติดต่อ LINE@256jetse" data-en="Apply through website buttons or contact LINE @256jetse">สมัครเรียนผ่านปุ่มในเว็บไซต์หรือติดต่อ LINE <strong class="text-white">@256jetse</strong></li>
                         <li data-th="โอนเงินตามยอดที่สรุปในระบบหรือใบเสนอราคา" data-en="Transfer the amount summarized in the system or quotation">โอนเงินตามยอดที่สรุปในระบบหรือใบเสนอราคา</li>
-                        <li data-th="ส่งสลิปการโอนเงินเข้ามาทางแชท LINE OA " data-en="Send the transfer slip LINE OA chat">ส่งสลิปการโอนเงินเข้ามาทางแชท LINE OA </li>
+                        <li data-th="ส่งสลิปการโอนเงินเข้ามาทางแชท LINE OA" data-en="Send the transfer slip LINE OA chat">ส่งสลิปการโอนเงินเข้ามาทางแชท LINE OA</li>
                         <li data-th="แอดมินตรวจสอบยอดและออกตารางเรียน/ลิงก์ห้องเรียนให้ทันที" data-en="Admin verifies the amount and immediately issues the schedule/classroom link">แอดมินตรวจสอบยอดและออกตารางเรียน/ลิงก์ห้องเรียนให้ทันที</li>
                     </ol>
                     <div class="mt-6 pt-6 border-t border-emerald-800 text-center">
@@ -442,7 +476,8 @@
             <p class="text-xs text-slate-500" data-th="© 2026 Han-Lian Chinese Language House. Online 100% All rights reserved. LINE OA: @256jetse" data-en="© 2026 Han-Lian Chinese Language House. Online 100% All rights reserved. LINE OA: @256jetse">© 2026 Han-Lian Chinese Language House. Online 100% All rights reserved. LINE OA: @256jetse</p>
         </div>
     </footer>
-<!-- Notification Toast for Copy -->
+
+    <!-- Notification Toast for Copy -->
     <div id="copyToast" class="fixed bottom-6 right-6 z-50 bg-emerald-900 text-white px-6 py-3 rounded-2xl shadow-2xl border border-gold-500/50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3">
         <span class="text-gold-400 text-xl">✓</span>
         <div>
@@ -450,6 +485,7 @@
             <p class="text-xs text-emerald-200" data-th="กำลังเปิด LINE เพื่อให้ท่านกดวาง (Paste) ส่งข้อมูลครับ" data-en="Opening LINE for you to paste and send data.">กำลังเปิด LINE เพื่อให้ท่านกดวาง (Paste) ส่งข้อมูลครับ</p>
         </div>
     </div>
+
     <!-- Enrollment Modal -->
     <div id="enrollModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gold-500/30 relative animate-in fade-in zoom-in duration-200 max-h-[90vh] overflow-y-auto">
@@ -506,7 +542,7 @@
             </div>
 
             <button onclick="submitEnrollment()" class="w-full bg-gradient-to-r from-emerald-800 to-emerald-950 hover:from-emerald-900 hover:to-emerald-900 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-base">
-                <span data-th="ยืนยันข้อมูลและส่งเข้า LINE (@256jetse)" data-en="Confirm & Send to LINE (@256jetse)">ยืนยันข้อมูลและส่งเข้า LINE (@256jetse)</span>
+                <span data-th="ยืนยันการข้อมูลและส่งเข้า LINE (@256jetse)" data-en="Confirm & Send to LINE (@256jetse)">ยืนยันข้อมูลและส่งเข้า LINE (@256jetse)</span>
             </button>
             <p class="text-center text-[11px] text-slate-400 mt-3" data-th="ระบบจะพาคุณไปยังแอปพลิเคชัน LINE อัตโนมัติเพื่อส่งข้อมูลให้แอดมิน" data-en="The system will automatically take you to the LINE application to send data to the admin.">ระบบจะพาคุณไปยังแอปพลิเคชัน LINE อัตโนมัติเพื่อส่งข้อมูลให้แอดมิน</p>
         </div>
@@ -515,7 +551,6 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // ข้อมูลราคาคอร์สทั้งหมด
         const courseData = {
             foundation: {
                 title: "ระดับพื้นฐาน (Foundation)",
@@ -546,9 +581,8 @@
 
         let selectedCourseKey = 'foundation';
         let selectedOptionIndex = 0;
-        let appliedDiscountRate = 0; // 0 = ไม่มีส่วนลด, 0.1 = ลด 10%
+        let appliedDiscountRate = 0;
 
-        // เปิด Modal สมัครเรียน
         function openEnrollModal(courseKey) {
             selectedCourseKey = courseKey;
             selectedOptionIndex = 0;
@@ -563,12 +597,11 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
-        // ฟังก์ชันสลับภาษา (TH / EN)
+
         function switchLang(lang) {
             const thBtn = document.getElementById('langThBtn');
             const enBtn = document.getElementById('langEnBtn');
 
-            // สลับสีปุ่มเลือกภาษา
             if (lang === 'th') {
                 thBtn.className = "px-2 py-0.5 rounded bg-gold-500 text-emerald-950 font-bold text-xs transition";
                 enBtn.className = "px-2 py-0.5 rounded bg-emerald-900 text-amber-100 font-semibold text-xs transition";
@@ -577,7 +610,6 @@
                 thBtn.className = "px-2 py-0.5 rounded bg-emerald-900 text-amber-100 font-semibold text-xs transition";
             }
 
-            // วนลูปเปลี่ยนข้อความทั้งหมดที่มี attribute data-th และ data-en
             const elements = document.querySelectorAll('[data-th][data-en]');
             elements.forEach(el => {
                 if (lang === 'en') {
@@ -587,14 +619,13 @@
                 }
             });
         }
-        // ปิด Modal สมัครเรียน
+
         function closeEnrollModal() {
             const modal = document.getElementById('enrollModal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
         }
 
-        // เรนเดอร์ตัวเลือกใน Modal
         function renderModalOptions() {
             const container = document.getElementById('modalCourseOptions');
             const data = courseData[selectedCourseKey];
@@ -621,7 +652,6 @@
             updateModalPrice();
         }
 
-        // คำนวณและอัปเดตราคาใน Modal
         function updateModalPrice() {
             const data = courseData[selectedCourseKey];
             if (!data) return;
@@ -636,7 +666,6 @@
             }
         }
 
-        // ใช้โค้ดส่วนลด
         function applyDiscount() {
             const codeInput = document.getElementById('discountCode');
             const msgEl = document.getElementById('discountMsg');
@@ -654,7 +683,6 @@
             updateModalPrice();
         }
 
-       // แสดง Toast แจ้งเตือนเมื่อคัดลอกสำเร็จ
         function showCopyToast() {
             const toast = document.getElementById('copyToast');
             toast.classList.remove('translate-y-24', 'opacity-0');
@@ -665,7 +693,6 @@
             }, 4000);
         }
 
-        // ฟังก์ชันคัดลอกข้อความและเปิด LINE
         function copyAndOpenLine(textToCopy) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(textToCopy).then(() => {
@@ -681,7 +708,6 @@
             }
         }
 
-        // Fallback สำหรับเบราว์เซอร์เก่า
         function fallbackCopyText(text) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
@@ -701,7 +727,6 @@
             document.body.removeChild(textArea);
         }
 
-        // ส่งข้อมูลยืนยันการสมัครเข้า LINE (ปรับมาเรียกใช้ copyAndOpenLine)
         function submitEnrollment() {
             const name = document.getElementById('userName').value.trim();
             const age = document.getElementById('userAge').value.trim();
@@ -734,7 +759,6 @@
             copyAndOpenLine(text);
         }
 
-        // ส่งหัวข้อ Custom Topic ผ่าน LINE (ปรับมาเรียกใช้ copyAndOpenLine)
         function submitCustomTopics() {
             const checkboxes = document.querySelectorAll('input[name="custom_topic"]:checked');
             if (checkboxes.length === 0) {
