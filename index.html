@@ -709,6 +709,54 @@
             updateModalPrice();
         }
 
+        // ฟังก์ชันตรวจสอบและกดใช้โค้ดส่วนลด (เปลี่ยนเป็น 5% และเช็กการใช้ซ้ำจากฐานข้อมูลทันที)
+        async function applyDiscount() {
+            const codeInput = document.getElementById('discountCode');
+            const msgEl = document.getElementById('discountMsg');
+            const phoneInput = document.getElementById('userPhone');
+            const code = codeInput.value.trim().toUpperCase();
+
+            if (code !== "HANLIAN10") {
+                appliedDiscountRate = 0;
+                msgEl.className = "text-xs mt-1.5 font-medium text-red-500";
+                msgEl.innerText = "✕ รหัสส่วนลดไม่ถูกต้อง";
+                updateModalPrice();
+                return;
+            }
+
+            const phone = phoneInput.value.trim();
+            if (!phone) {
+                msgEl.className = "text-xs mt-1.5 font-medium text-red-500";
+                msgEl.innerText = "✕ กรุณากรอกเบอร์โทรศัพท์ก่อนใช้โค้ดส่วนลด";
+                appliedDiscountRate = 0;
+                updateModalPrice();
+                return;
+            }
+
+            try {
+                const { data: existingEnrollments, error: checkError } = await _supabase
+                    .from('enrollments')
+                    .select('id')
+                    .eq('phone', phone)
+                    .ilike('discount_code', '%HANLIAN10%');
+
+                if (!checkError && existingEnrollments && existingEnrollments.length > 0) {
+                    appliedDiscountRate = 0;
+                    msgEl.className = "text-xs mt-1.5 font-medium text-red-500";
+                    msgEl.innerText = "✕ ท่านเคยใช้สิทธิ์ส่วนลดนี้ไปแล้ว (จำกัด 1 สิทธิ์/ท่าน)";
+                    updateModalPrice();
+                    return;
+                }
+            } catch (err) {
+                console.error('Error checking discount usage:', err);
+            }
+
+            appliedDiscountRate = 0.05; 
+            msgEl.className = "text-xs mt-1.5 font-medium text-emerald-600";
+            msgEl.innerText = "✓ ใช้โค้ดส่วนลดสำเร็จ ";
+            updateModalPrice();
+        }
+
         function updateModalPrice() {
             const data = courseData[selectedCourseKey];
             if (!data) return;
@@ -723,23 +771,6 @@
             }
         }
 
-        function applyDiscount() {
-            const codeInput = document.getElementById('discountCode');
-            const msgEl = document.getElementById('discountMsg');
-            const code = codeInput.value.trim().toUpperCase();
-
-            if (code === "HANLIAN10") {
-                appliedDiscountRate = 0.1;
-                msgEl.className = "text-xs mt-1.5 font-medium text-emerald-600";
-                msgEl.innerText = "✓ ใช้โค้ดส่วนลดสำเร็จ";
-            } else {
-                appliedDiscountRate = 0;
-                msgEl.className = "text-xs mt-1.5 font-medium text-red-500";
-                msgEl.innerText = "✕ รหัสส่วนลดไม่ถูกต้อง";
-            }
-            updateModalPrice();
-        }
-
         function showCopyToast() {
             const toast = document.getElementById('copyToast');
             toast.classList.remove('translate-y-24', 'opacity-0');
@@ -747,7 +778,7 @@
             setTimeout(() => {
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-24', 'opacity-0');
-            }, 10000); // แสดงผลแจ้งเตือน 10 วินาที
+            }, 10000);
         }
 
         function copyAndOpenLine(textToCopy) {
@@ -784,7 +815,7 @@
             document.body.removeChild(textArea);
         }
 
-       async function submitEnrollment() {
+        async function submitEnrollment() {
             const name = document.getElementById('userName').value.trim();
             const age = document.getElementById('userAge').value.trim();
             const phone = document.getElementById('userPhone').value.trim();
@@ -815,28 +846,9 @@
             const data = courseData[selectedCourseKey];
             const selectedOpt = data.options[selectedOptionIndex];
             const basePrice = selectedOpt.price;
-            let finalPrice = basePrice * (1 - appliedDiscountRate);
+            const finalPrice = basePrice * (1 - appliedDiscountRate);
             let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 5%)` : `ไม่มีส่วนลด`;
 
-            // หากมีการใช้โค้ดส่วนลด ให้ตรวจสอบในฐานข้อมูลว่าเบอร์โทรนี้เคยใช้ไปหรือยัง
-            if (appliedDiscountRate > 0) {
-                try {
-                    const { data: existingEnrollments, error: checkError } = await _supabase
-                        .from('enrollments')
-                        .select('id')
-                        .eq('phone', phone)
-                        .ilike('discount_code', '%HANLIAN10%');
-
-                    if (!checkError && existingEnrollments && existingEnrollments.length > 0) {
-                        alert('ขออภัยครับ ท่านได้ใช้สิทธิ์ส่วนลด HANLIAN10 ไปแล้ว (จำกัด 1 สิทธิ์ต่อ 1 ท่าน)');
-                        return; // หยุดการทำงาน ไม่ให้สมัครซ้ำ
-                    }
-                } catch (err) {
-                    console.error('Error checking discount usage:', err);
-                }
-            }
-
-            // บันทึกข้อมูลลงใน Supabase Database
             try {
                 const { error } = await _supabase
                     .from('enrollments')
@@ -878,6 +890,7 @@
             closeEnrollModal();
             copyAndOpenLine(text);
         }
+
         function submitCustomTopics() {
             const checkboxes = document.querySelectorAll('input[name="custom_topic"]:checked');
             if (checkboxes.length === 0) {
