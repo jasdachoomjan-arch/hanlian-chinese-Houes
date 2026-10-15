@@ -797,7 +797,7 @@
             document.body.removeChild(textArea);
         }
 
-        function submitEnrollment() {
+       async function submitEnrollment() {
             const name = document.getElementById('userName').value.trim();
             const age = document.getElementById('userAge').value.trim();
             const phone = document.getElementById('userPhone').value.trim();
@@ -808,6 +808,7 @@
                 return;
             }
 
+            // ตรวจสอบข้อมูลวันที่เลือก (อย่างน้อย 3 วัน)
             const selectedDays = [];
             document.querySelectorAll('input[name="class_days"]:checked').forEach(cb => {
                 selectedDays.push(cb.value);
@@ -818,6 +819,7 @@
                 return;
             }
 
+            // ตรวจสอบช่วงเวลาที่เลือก
             const selectedTimeEl = document.querySelector('input[name="class_time"]:checked');
             if (!selectedTimeEl) {
                 alert('กรุณาเลือกช่วงเวลาที่ต้องการเรียน 1 ช่วงเวลาครับ');
@@ -831,6 +833,35 @@
             const finalPrice = basePrice * (1 - appliedDiscountRate);
             let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
 
+            // 1. บันทึกข้อมูลลงใน Supabase Database
+            try {
+                const { error } = await _supabase
+                    .from('enrollments')
+                    .insert([
+                        {
+                            course_name: data.title,
+                            option_name: selectedOpt.name,
+                            class_days: selectedDays.join(', '),
+                            class_time: classTime,
+                            full_name: name,
+                            age: age || '-',
+                            phone: phone,
+                            address: address || '-',
+                            discount_code: discountText,
+                            final_price: finalPrice
+                        }
+                    ]);
+
+                if (error) {
+                    console.error('Supabase Error:', error.message);
+                    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูลลงฐานข้อมูล: ' + error.message);
+                    return;
+                }
+            } catch (err) {
+                console.error('Network Error:', err);
+            }
+
+            // 2. สร้างข้อความส่งเข้า LINE ตามปกติ
             let text = `สวัสดีค่ะ/ครับ สนใจสมัครเรียน:\n` +
                        `📚 หลักสูตร: ${data.title}\n` +
                        `📌 รูปแบบ: ${selectedOpt.name}\n` +
@@ -847,7 +878,6 @@
             closeEnrollModal();
             copyAndOpenLine(text);
         }
-
         function submitCustomTopics() {
             const checkboxes = document.querySelectorAll('input[name="custom_topic"]:checked');
             if (checkboxes.length === 0) {
