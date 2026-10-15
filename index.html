@@ -717,7 +717,7 @@
 
             const displayEl = document.getElementById('finalPriceDisplay');
             if (appliedDiscountRate > 0) {
-                displayEl.innerHTML = `<span class="line-through text-slate-400 text-sm mr-2">${basePrice.toLocaleString()} บาท</span> <span class="text-emerald-950">${finalPrice.toLocaleString()} บาท <span class="text-xs text-emerald-600 font-normal">(ลด 10%)</span></span>`;
+                displayEl.innerHTML = `<span class="line-through text-slate-400 text-sm mr-2">${basePrice.toLocaleString()} บาท</span> <span class="text-emerald-950">${finalPrice.toLocaleString()} บาท <span class="text-xs text-emerald-600 font-normal">(ลด 5%)</span></span>`;
             } else {
                 displayEl.innerHTML = `${basePrice.toLocaleString()} บาท`;
             }
@@ -731,7 +731,7 @@
             if (code === "HANLIAN10") {
                 appliedDiscountRate = 0.1;
                 msgEl.className = "text-xs mt-1.5 font-medium text-emerald-600";
-                msgEl.innerText = "✓ ใช้โค้ดส่วนลดสำเร็จ (ลด 10%)";
+                msgEl.innerText = "✓ ใช้โค้ดส่วนลดสำเร็จ";
             } else {
                 appliedDiscountRate = 0;
                 msgEl.className = "text-xs mt-1.5 font-medium text-red-500";
@@ -816,7 +816,7 @@
             const selectedOpt = data.options[selectedOptionIndex];
             const basePrice = selectedOpt.price;
             let finalPrice = basePrice * (1 - appliedDiscountRate);
-            let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 10%)` : `ไม่มีส่วนลด`;
+            let discountText = (appliedDiscountRate > 0) ? `HANLIAN10 (ลด 5%)` : `ไม่มีส่วนลด`;
 
             // หากมีการใช้โค้ดส่วนลด ให้ตรวจสอบในฐานข้อมูลว่าเบอร์โทรนี้เคยใช้ไปหรือยัง
             if (appliedDiscountRate > 0) {
@@ -828,7 +828,7 @@
                         .ilike('discount_code', '%HANLIAN10%');
 
                     if (!checkError && existingEnrollments && existingEnrollments.length > 0) {
-                        alert('ขออภัยครับ เบอร์โทรศัพท์นี้ได้ใช้สิทธิ์ส่วนลด HANLIAN10 ไปแล้ว (จำกัด 1 สิทธิ์ต่อ 1 ท่าน)');
+                        alert('ขออภัยครับ ท่านได้ใช้สิทธิ์ส่วนลด HANLIAN10 ไปแล้ว (จำกัด 1 สิทธิ์ต่อ 1 ท่าน)');
                         return; // หยุดการทำงาน ไม่ให้สมัครซ้ำ
                     }
                 } catch (err) {
