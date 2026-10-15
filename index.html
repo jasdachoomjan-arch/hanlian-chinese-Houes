@@ -86,7 +86,7 @@
     <!-- 1. รูปภาพพื้นหลังใหม่ -->
     <img src="https://cdn.phototourl.com/member/2026-10-10-2092c532-0ed0-4c8a-9296-14f5c38fca25.png" alt="Han-Lian Background" class="absolute inset-0 w-full h-full object-cover object-center opacity-30">
     
-    <!-- 2. เนื้อหาภายใน Hero Section (โครงสร้างเดิมของคุณ) -->
+    <!-- 2. เนื้อหาภายใน Hero Section -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <span class="inline-block bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs uppercase tracking-widest px-4 py-1.5 rounded-full font-semibold mb-6" data-th="เปิดประตูสู่โลกกว้าง" data-en="Broaden your horizons">
             เปิดประตูสู่โลกกว้าง
@@ -273,7 +273,7 @@
     </div>
 </section>
 
-    <!-- Demo Video Section (Separate Section for Lesson Presentation Video in 16:9 Landscape) -->
+    <!-- Demo Video Section -->
     <section id="demo-video" class="py-20 bg-gradient-to-b from-slate-900 to-emerald-950 text-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
@@ -283,7 +283,6 @@
             </div>
 
             <div class="bg-emerald-900/40 border border-gold-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-md space-y-6">
-                <!-- ปรับสัดส่วนวิดีโอเป็นแนวนอน 16:9 (aspect-video) ที่นี่ -->
                 <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-2 border-gold-500/50 bg-black">
                     <video controls autoplay muted loop playsinline class="w-full h-full object-contain">
                         <source src="https://www.image2url.com/r2/default/videos/1791445734297-9c659fc3-4c82-47c7-b10b-ed2a554548a0.webm" type="video/webm">
@@ -306,7 +305,7 @@
         </div>
     </section>
 
-    <!-- Instructor Section (Kept Original Image Only) -->
+    <!-- Instructor Section -->
     <section id="instructor" class="py-20 bg-emerald-50/50 border-y border-emerald-100">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -316,7 +315,6 @@
             </div>
 
             <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- ส่วนแสดงรูปภาพเดิมเดี่ยวๆ -->
                 <div class="lg:col-span-5 flex justify-center">
                     <div class="relative w-80 sm:w-96">
                         <div class="absolute -inset-2 bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-300 rounded-2xl blur-sm opacity-80"></div>
@@ -490,7 +488,7 @@
                     </div>
                 </div>
 
-                <!-- 1. เลือกวันที่ต้องการเรียน (เลือกได้มากกว่า 1 วัน / อย่างน้อย 3 วัน) -->
+                <!-- 1. เลือกวันที่ต้องการเรียน -->
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
                     <label class="block text-xs font-bold text-slate-800 uppercase mb-1">
                         1. เลือกวันที่ต้องการเรียน <span class="text-red-400 font-normal normal-case">(เลือกได้อย่างน้อย 3 วัน/สัปดาห์)</span>
@@ -527,7 +525,7 @@
                     </div>
                 </div>
 
-                <!-- 2. เลือกช่วงเวลาที่ต้องการเรียน (เลือกได้เพียง 1 ช่วงเวลา) -->
+                <!-- 2. เลือกช่วงเวลาที่ต้องการเรียน -->
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
                     <label class="block text-xs font-bold text-slate-800 uppercase mb-1">
                         2. เลือกช่วงเวลาที่ต้องการเรียน <span class="text-red-400 font-normal normal-case">(เลือกได้ 1 ช่วงเวลา)</span>
@@ -659,7 +657,6 @@
             document.getElementById('discountCode').value = '';
             document.getElementById('discountMsg').innerText = '';
             
-            // รีเซ็ตค่าฟอร์มวันและเวลา
             document.querySelectorAll('input[name="class_days"]').forEach(cb => cb.checked = false);
             document.querySelectorAll('input[name="class_time"]').forEach(rb => rb.checked = false);
 
@@ -763,7 +760,7 @@
             setTimeout(() => {
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-24', 'opacity-0');
-            }, 10000); // 10 วินาที
+            }, 10000);
         }
 
         function copyAndOpenLine(textToCopy) {
@@ -811,7 +808,6 @@
                 return;
             }
 
-            // ตรวจสอบข้อมูลวันที่เลือก (เลือกอย่างน้อย 3 วัน)
             const selectedDays = [];
             document.querySelectorAll('input[name="class_days"]:checked').forEach(cb => {
                 selectedDays.push(cb.value);
@@ -822,7 +818,6 @@
                 return;
             }
 
-            // ตรวจสอบช่วงเวลาที่เลือก (เลือก 1 ช่วงเวลา)
             const selectedTimeEl = document.querySelector('input[name="class_time"]:checked');
             if (!selectedTimeEl) {
                 alert('กรุณาเลือกช่วงเวลาที่ต้องการเรียน 1 ช่วงเวลาครับ');
